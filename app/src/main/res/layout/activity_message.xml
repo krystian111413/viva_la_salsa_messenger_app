@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tylek_babki"
+    android:padding="10dp"
+    tools:context="com.kowalski.krystian.vivalasalsamessenger.Message"
+    tools:layout_editor_absoluteX="8dp"
+    tools:layout_editor_absoluteY="8dp">
+
+    <EditText
+        android:id="@+id/editText_tresc_smsa"
+        android:layout_width="359dp"
+        android:layout_height="167dp"
+        android:layout_above="@+id/button_wyslij"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/foreground"
+        android:gravity="top|left"
+        android:hint="@string/hint_pola_wiadomosci"
+        android:minHeight="167dp"
+        android:padding="5dp"
+        android:textColorLink="@android:color/black"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="16dp"
+        android:inputType="textImeMultiLine"/>
+
+    <Button
+        android:id="@+id/button_wyslij"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="15dp"
+        android:elevation="0dp"
+        android:fontFamily="cursive"
+        android:text="@string/send_button"
+        app:layout_constraintTop_toBottomOf="@+id/editText_tresc_smsa"
+        tools:layout_editor_absoluteX="182dp" />
+
+    <ListView
+        android:id="@+id/ListViewListaGrupKontaktow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/editText_tresc_smsa"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="#a7fffdb6" />
+
+</RelativeLayout>
+

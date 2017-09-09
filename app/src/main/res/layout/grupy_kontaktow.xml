@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hiphop"
+    android:padding="10dp">
+
+    <Button
+        android:id="@+id/buttonEdytujGrupe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#db70be61"
+        android:padding="5dp"
+        android:text="Dodaj grupe" />
+
+    <Button
+        android:id="@+id/buttonUsunGrupe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="#d33f3f"
+        android:padding="5dp"
+        android:text="Usun grupy" />
+
+    <ListView
+        android:id="@+id/ListViewGrupy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/buttonEdytujGrupe"
+        android:layout_marginTop="10dp"
+        android:background="#a2b8b8b8"
+        android:padding="5dp" />
+
+</RelativeLayout>
