@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tylek_babki"
+    android:background="@color/colorPrimary"
     android:padding="10dp"
     tools:context="com.kowalski.krystian.vivalasalsamessenger.Message"
     tools:layout_editor_absoluteX="8dp"
@@ -20,12 +20,12 @@
         android:background="@drawable/foreground"
         android:gravity="top|left"
         android:hint="@string/hint_pola_wiadomosci"
+        android:inputType="textImeMultiLine"
         android:minHeight="167dp"
         android:padding="5dp"
         android:textColorLink="@android:color/black"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="16dp"
-        android:inputType="textImeMultiLine"/>
+        tools:layout_editor_absoluteY="16dp" />
 
     <Button
         android:id="@+id/button_wyslij"
