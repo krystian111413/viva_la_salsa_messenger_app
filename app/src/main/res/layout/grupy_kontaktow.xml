@@ -7,23 +7,24 @@
 
     <Button
         android:id="@+id/buttonEdytujGrupe"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:padding="5dp"
-        android:text="Dodaj grupe"
+        android:text="@string/add_team"
         android:background="?android:selectableItemBackground"/>
 
-    <Button
-        android:id="@+id/buttonUsunGrupe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:padding="5dp"
-        android:text="Usun grupy"
-        android:background="?android:selectableItemBackground"/>
+    <!--<Button-->
+        <!--android:id="@+id/buttonUsunGrupe"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="5dp"-->
+        <!--android:text="Usun grupy"-->
+        <!--android:background="?android:selectableItemBackground"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginEnd="22dp" />-->
 
     <ListView
         android:id="@+id/ListViewGrupy"
