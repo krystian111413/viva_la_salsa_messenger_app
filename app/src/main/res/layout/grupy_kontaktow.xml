@@ -12,7 +12,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:padding="5dp"
-        android:text="Dodaj grupe" />
+        android:text="Dodaj grupe"
+        android:background="?android:selectableItemBackground"/>
 
     <Button
         android:id="@+id/buttonUsunGrupe"
@@ -21,7 +22,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:padding="5dp"
-        android:text="Usun grupy" />
+        android:text="Usun grupy"
+        android:background="?android:selectableItemBackground"/>
 
     <ListView
         android:id="@+id/ListViewGrupy"

@@ -17,7 +17,7 @@
         android:layout_above="@+id/button_wyslij"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="18dp"
-        android:background="@drawable/foreground"
+        android:background="@color/colorPrimaryDark"
         android:gravity="top|left"
         android:hint="@string/hint_pola_wiadomosci"
         android:inputType="textImeMultiLine"
@@ -34,9 +34,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="15dp"
+        android:background="?android:selectableItemBackground"
         android:elevation="0dp"
         android:fontFamily="cursive"
         android:text="@string/send_button"
+        android:textColor="@android:color/background_light"
         app:layout_constraintTop_toBottomOf="@+id/editText_tresc_smsa"
         tools:layout_editor_absoluteX="182dp" />
 
@@ -48,7 +50,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:background="#a7fffdb6" />
+        android:background="@color/colorPrimaryDark" />
 
 </RelativeLayout>
 
