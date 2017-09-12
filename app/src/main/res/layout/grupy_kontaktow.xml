@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/hiphop"
+    android:background="@color/colorPrimary"
     android:padding="10dp">
 
     <Button
@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="#db70be61"
         android:padding="5dp"
-        android:text="Dodaj grupe" />
+        android:text="Dodaj grupe"
+        android:background="?android:selectableItemBackground"/>
 
     <Button
         android:id="@+id/buttonUsunGrupe"
@@ -21,9 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:background="#d33f3f"
         android:padding="5dp"
-        android:text="Usun grupy" />
+        android:text="Usun grupy"
+        android:background="?android:selectableItemBackground"/>
 
     <ListView
         android:id="@+id/ListViewGrupy"
