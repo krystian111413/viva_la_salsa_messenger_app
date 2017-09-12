@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">VivaLaSalsaMessenger</string>
     <string name="hint_pola_wiadomosci">Wprowadź tekst wiadomości...</string>
     <string name="send_button">Wyślij</string>
+    <string name="title_dashboard">Zarządzaj grupami</string>
+    <string name="title_home">Wyślij wiadomość</string>
+    <string name="title_notifications">Edytuj grupy</string>
+    <string name="title_activity_main">Messenger Viva la Salsa</string>
 </resources>
