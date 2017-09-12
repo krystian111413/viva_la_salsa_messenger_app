@@ -21,7 +21,7 @@ public class Message extends Fragment {
     Button wyslij;
     EditText editTextTrescWiadomosci;
     ListView listView;
-    Data data;// cos tam
+    Data data;
 
     @Nullable
     @Override
