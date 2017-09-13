@@ -6,4 +6,10 @@
     <string name="title_home">Wyślij wiadomość</string>
     <string name="title_notifications">Edytuj grupy</string>
     <string name="title_activity_main">Messenger Viva la Salsa</string>
+    <string name="history">Historia</string>
+    <string name="menage_teams">Zarządzaj grupą</string>
+    <string name="send_message">Wyślij wiadomość</string>
+    <string name="templates">Szablony</string>
+    <string name="add_team">Dodaj grupe</string>
+    <string name="Empty">Brak</string>
 </resources>

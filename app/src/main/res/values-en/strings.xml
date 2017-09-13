@@ -6,4 +6,10 @@
     <string name="title_dashboard">Menage groups</string>
     <string name="title_notifications">Edit groups</string>
     <string name="title_activity_main">Messenger Viva la Salsa</string>
+    <string name="send_message">Send Message</string>
+    <string name="menage_teams">Menage Teams</string>
+    <string name="history">History</string>
+    <string name="templates">Templates</string>
+    <string name="add_team">Add Team</string>
+    <string name="Empty">Empty</string>
 </resources>

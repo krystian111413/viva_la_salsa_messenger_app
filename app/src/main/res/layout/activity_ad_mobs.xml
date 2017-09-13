@@ -7,7 +7,7 @@
     android:background="@drawable/taneczna_grupa"
     android:elevation="1dp"
     android:foregroundTintMode="src_over"
-    tools:context="com.kowalski.krystian.vivalasalsamessenger.Views.AdMobs">
+    tools:context=".Views.Activities.AdMobs">
 
     <!-- view for AdMob Interstitial Ad -->
 

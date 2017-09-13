@@ -6,7 +6,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.kowalski.krystian.vivalasalsamessenger"
+        applicationId "com.zerter.teamconnect"
         minSdkVersion 22
         targetSdkVersion 25
         versionCode 1
@@ -32,6 +32,7 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.google.android.gms:play-services-ads:11.0.4'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     testCompile 'junit:junit:4.12'
 }
 repositories {

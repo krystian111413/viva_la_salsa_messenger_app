@@ -2,28 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/hiphop"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
     android:padding="10dp">
 
-    <Button
+    <com.zerter.teamconnect.Controlers.MyButton
         android:id="@+id/buttonEdytujGrupe"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="#db70be61"
+        android:background="?android:selectableItemBackground"
         android:padding="5dp"
-        android:text="Dodaj grupe" />
+        android:text="@string/add_team"
+        android:textColor="@android:color/background_light"
+        app:customFont="fonts/Oswald-Stencil.ttf"/>
 
-    <Button
-        android:id="@+id/buttonUsunGrupe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:background="#d33f3f"
-        android:padding="5dp"
-        android:text="Usun grupy" />
+    <!--<Button-->
+    <!--android:id="@+id/buttonUsunGrupe"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:padding="5dp"-->
+    <!--android:text="Usun grupy"-->
+    <!--android:background="?android:selectableItemBackground"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_marginEnd="22dp" />-->
 
     <ListView
         android:id="@+id/ListViewGrupy"
@@ -32,7 +36,6 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/buttonEdytujGrupe"
         android:layout_marginTop="10dp"
-        android:background="#a2b8b8b8"
         android:padding="5dp" />
 
 </RelativeLayout>
