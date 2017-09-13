@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Viva La Salsa Messenger</string>
+    <string name="app_name" translatable="false">Team Connect</string>
     <string name="hint_pola_wiadomosci">Wprowadź tekst wiadomości...</string>
     <string name="send_button">Wyślij</string>
     <string name="title_activity_main">Messenger Viva la Salsa</string>
@@ -18,4 +18,14 @@
         For more information, see https://support.google.com/admob/answer/3052638
     <!- -->
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="title_activity_general">GeneralActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="send_message">Send Message</string>
+    <string name="menage_teams">Menage Teams</string>
+    <string name="history">History</string>
+    <string name="templates">Templates</string>
+    <string name="add_team">Add Team</string>
+    <string name="OK">OK</string>
 </resources>

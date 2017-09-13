@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/VivaLaSalsaMessenger.iml" filepath="$PROJECT_DIR$/VivaLaSalsaMessenger.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/viva_la_salsa_messenger_app.iml" filepath="$PROJECT_DIR$/viva_la_salsa_messenger_app.iml" />
     </modules>
   </component>
 </project>

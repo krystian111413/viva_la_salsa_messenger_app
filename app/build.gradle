@@ -6,7 +6,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.kowalski.krystian.vivalasalsamessenger"
+        applicationId "com.zerter.teamconnect"
         minSdkVersion 22
         targetSdkVersion 25
         versionCode 1
