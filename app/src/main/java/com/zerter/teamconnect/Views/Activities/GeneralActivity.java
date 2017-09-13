@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.zerter.teamconnect.EdytujGrupyFragment;
+import com.zerter.teamconnect.HistoryMessageFragment;
 import com.zerter.teamconnect.R;
 import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
 import com.zerter.teamconnect.Views.Fragments.Message;
@@ -105,8 +105,8 @@ public class GeneralActivity extends AppCompatActivity
             setContener(menageGroupContacts);
 
         } else if (id == R.id.nav_history) {
-            EdytujGrupyFragment edytujGrupyFragment = new EdytujGrupyFragment();
-            setContener(edytujGrupyFragment);
+            HistoryMessageFragment historyMessageFragment = new HistoryMessageFragment();
+            setContener(historyMessageFragment);
 
         }
         if (id == R.id.nav_send_msg) {
