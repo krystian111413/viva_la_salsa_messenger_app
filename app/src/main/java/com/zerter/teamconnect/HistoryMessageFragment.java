@@ -95,8 +95,8 @@ public class HistoryMessageFragment extends Fragment {
 
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.message_item_history, null, false);
-            final ExpandableRelativeLayout expandableLayout
-                    = (ExpandableRelativeLayout) convertView.findViewById(R.id.expandableLayout);
+            final ExpandableWeightLayout expandableLayout
+                    = (ExpandableWeightLayout) convertView.findViewById(R.id.expandableLayout);
             final MyTextView team = (MyTextView) convertView.findViewById(R.id.teamName);
             final MyTextView msg = (MyTextView) convertView.findViewById(R.id.messageHistory);
             if (message != null) {
@@ -107,18 +107,29 @@ public class HistoryMessageFragment extends Fragment {
                 msg.setText("n/a");
             }
 
+
             team.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    expandableLayout.setVisibility(View.VISIBLE);
+                    expandableLayout.setVisibility(View.VISIBLE);
                     msg.measure(0, 0);
-//                    expandableLayout.setMinimumHeight(msg.getMeasuredHeight() + 70);
+                    expandableLayout.setMinimumHeight(msg.getMeasuredHeight() + 70);
                     expandableLayout.toggle();
+// expand
                     expandableLayout.expand();
+// collapse
                     expandableLayout.collapse();
+
+// move position of child view
+//                    expandableLayout.moveChild(0);
+// move optional position
+//                    expandableLayout.move(500);
+
+// set base position which is close position
+//                    expandableLayout.setClosePosition(500);
                 }
             });
-//            expandableLayout.setVisibility(View.GONE);
+            expandableLayout.setVisibility(View.GONE);
 
             return convertView;
         }

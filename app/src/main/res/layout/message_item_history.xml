@@ -33,41 +33,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
-            <View
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                android:id="@+id/expandableLayout"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="10"
-                android:paddingLeft="30dp"
-                app:ael_duration="500"
-                app:ael_interpolator="anticipateOvershoot">
-
-
-                <com.zerter.teamconnect.Controlers.MyTextView
+                <com.github.aakira.expandablelayout.ExpandableWeightLayout
+                    android:id="@+id/expandableLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/team_image"
-                    app:customFont="fonts/Oswald-Light.ttf"
-                    android:text="@string/Empty"
-                    android:id="@+id/messageHistory"
-                    android:textColor="#ffff"
-                    android:textSize="18sp"/>
-            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:paddingLeft="30dp"
+                    app:ael_duration="500"
+                    app:ael_interpolator="bounce"
+                    app:ael_orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-        </LinearLayout>
+
+
+                    <com.zerter.teamconnect.Controlers.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/team_image"
+                        app:customFont="fonts/Oswald-Light.ttf"
+                        android:text="@string/Empty"
+                        android:id="@+id/messageHistory"
+                        android:textColor="#ffff"
+                        android:textSize="18sp"/>
+                </com.github.aakira.expandablelayout.ExpandableWeightLayout>
+
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1" />-->
+            </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>
