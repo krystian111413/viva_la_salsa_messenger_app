@@ -102,6 +102,7 @@ public class AdMobs extends Activity {
 
     private void nextActivity(){
         startActivity(new Intent(this, GeneralActivity.class));
+        finish();
     }
 
 }

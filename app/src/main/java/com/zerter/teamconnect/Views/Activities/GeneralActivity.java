@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -34,8 +35,10 @@ public class GeneralActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                Message message = new Message();
+                setContener(message);
             }
         });
 
@@ -47,6 +50,10 @@ public class GeneralActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //own
+        setTitleBar();
+
         Message message = new Message();
         setContener(message);
     }
@@ -92,7 +99,7 @@ public class GeneralActivity extends AppCompatActivity
         if (id == R.id.nav_send_msg) {
             Message message = new Message();
             setContener(message);
-            // Handle the camera action
+
         } else if (id == R.id.nav_menage_teams) {
             MenageGroupContacts menageGroupContacts = new MenageGroupContacts();
             setContener(menageGroupContacts);
@@ -112,5 +119,12 @@ public class GeneralActivity extends AppCompatActivity
         FragmentTransaction FT = FM.beginTransaction();
         FT.replace(R.id.GeneralContener, fragment);
         FT.commit();
+    }
+
+    private void setTitleBar(){
+        android.app.ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.app_name);
+        }
     }
 }
