@@ -106,7 +106,7 @@ public class HistoryMessageFragment extends Fragment {
             final Message message = getItem(position);
 
             LayoutInflater inflater = context.getLayoutInflater();
-            convertView = inflater.inflate(R.layout.message_item_history, null, false);
+            convertView = inflater.inflate(R.layout.message_item_history, null, true);
             final ExpandableWeightLayout expandableLayout
                     = (ExpandableWeightLayout) convertView.findViewById(R.id.expandableLayout);
             final MyTextView team = (MyTextView) convertView.findViewById(R.id.teamName);
@@ -133,11 +133,12 @@ public class HistoryMessageFragment extends Fragment {
                         msg.measure(0, 0);
 
                         int a= (int) ((msg.getMeasuredHeight() * 1.3));
-                        int b = msg.getMeasuredHeight();
-                        int c =(int) (a * 1.2);
+                        int b = msg.getBaseline();
+                        int c =(int) (b * 20);
                         expandableLayout.setMinimumHeight(c);
-                        Toast.makeText(getActivity(),"getMeasuredHeight: " + msg.getMeasuredHeight() + "" +
-                                "\ndocelowa: "+c ,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"a: " + a+
+                                "\nb: "+b +
+                                "c: " + c,Toast.LENGTH_LONG).show();
 
                     } else {
                         msg.setText("n/a");
