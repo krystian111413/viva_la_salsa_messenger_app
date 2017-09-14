@@ -10,11 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.github.aakira.expandablelayout.ExpandableLayout;
-import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.github.aakira.expandablelayout.ExpandableWeightLayout;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MyTextView;
@@ -58,21 +56,35 @@ public class HistoryMessageFragment extends Fragment {
     }
 
 
-
-
     public void setAdapter() {
         Message message = new Message();
         Team team = new Team();
         team.setName("DUPA");
         message.setTeam(team);
         message.setMessage("Treść wiadomości\n  messageList.add(message);\n private class ListAdapterMessage extends ArrayAdapter<Message> {");
-//        message.setMessage("Treść wiadomości");
         List<Message> messageList = new ArrayList<>();
-        for(int i = 0; i< 15;i++){
-            messageList.add(message);
-        }
 
-        ListAdapterMessage listAdapterMessage = new ListAdapterMessage(getActivity(),messageList);
+        messageList.add(message);
+        message = new Message();
+        message.setTeam(team);
+        message.setMessage("asdas asd asd asd as\nasd as das d\nasd asd fsd\nsda fsdf d gdf sd \nsd gdsfg dsf gsd\nfg dsdf gsdf \nsdf sdf gsdfg sd gsd asd asd as\nasd as das dasd asd fsdsda fsdf d gdf sd sd gdsfg dsf gsd\nfg ds");
+        messageList.add(message);
+        messageList.add(message);
+        message = new Message();
+        message.setTeam(team);
+        message.setMessage("start asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd end ");
+        messageList.add(message);
+        message = new Message();
+        message.setTeam(team);
+        message.setMessage("Przeanalizować pozostałe listy, zwracając szczególną uwagę na dokumenty\n" +
+                "zawierające fragmenty o długości przekraczającej limit Współczynnika podobieństwa\n" +
+                "2 (są one oznaczone pogrubioną czcionką). W przypadku takich dokumentów,\n" +
+                "zwłaszcza znajdujących sie na czele listy, należy użyć linku „zaznacz fragmenty”\n" +
+                "i sprawdzić, czy są one przede wszystkim krótkimi frazami rozrzuconymi po całym\n" +
+                "dokumencie (w takiej sytuacji można je uznać za przypadkowe zapożyczenia), czy ");
+        messageList.add(message);
+
+        ListAdapterMessage listAdapterMessage = new ListAdapterMessage(getActivity(), messageList);
         listView.setAdapter(listAdapterMessage);
     }
 
@@ -99,37 +111,47 @@ public class HistoryMessageFragment extends Fragment {
                     = (ExpandableWeightLayout) convertView.findViewById(R.id.expandableLayout);
             final MyTextView team = (MyTextView) convertView.findViewById(R.id.teamName);
             final MyTextView msg = (MyTextView) convertView.findViewById(R.id.messageHistory);
+//            final View top = convertView.findViewById(R.id.ExpandableTop);
+//            final View botton = convertView.findViewById(R.id.ExpandableBotton);
             if (message != null) {
                 team.setText(message.getTeam().getName());
-                msg.setText(message.getMessage());
+
             } else {
                 team.setText("n/a");
-                msg.setText("n/a");
+
             }
-
-
-            team.setOnClickListener(new View.OnClickListener() {
+            convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    expandableLayout.setVisibility(View.VISIBLE);
-                    msg.measure(0, 0);
-                    expandableLayout.setMinimumHeight(msg.getMeasuredHeight() + 70);
+
+                    if (msg.getVisibility() == View.GONE){
+                        msg.setVisibility(View.VISIBLE);
+                    }
+
+                    if (message != null) {
+                        msg.setText(message.getMessage());
+                        msg.measure(0, 0);
+
+                        int a= (int) ((msg.getMeasuredHeight() * 1.3));
+                        int b = msg.getMeasuredHeight();
+                        int c =(int) (a * 1.2);
+                        expandableLayout.setMinimumHeight(c);
+                        Toast.makeText(getActivity(),"getMeasuredHeight: " + msg.getMeasuredHeight() + "" +
+                                "\ndocelowa: "+c ,Toast.LENGTH_LONG).show();
+
+                    } else {
+                        msg.setText("n/a");
+                    }
                     expandableLayout.toggle();
-// expand
                     expandableLayout.expand();
-// collapse
                     expandableLayout.collapse();
 
-// move position of child view
-//                    expandableLayout.moveChild(0);
-// move optional position
-//                    expandableLayout.move(500);
 
-// set base position which is close position
-//                    expandableLayout.setClosePosition(500);
+//                    if (msg.getVisibility() == View.VISIBLE){
+//                        msg.setVisibility(View.GONE);
+//                    }
                 }
             });
-            expandableLayout.setVisibility(View.GONE);
 
             return convertView;
         }
