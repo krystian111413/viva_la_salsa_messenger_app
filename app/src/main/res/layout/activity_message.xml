@@ -10,47 +10,55 @@
     tools:layout_editor_absoluteX="8dp"
     tools:layout_editor_absoluteY="8dp">
 
-    <com.zerter.teamconnect.Controlers.MyEditText
-        android:id="@+id/editText_tresc_smsa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button_wyslij"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="18dp"
-        android:background="@color/colorPrimaryDark"
-        android:gravity="top|start"
-        android:hint="@string/hint_pola_wiadomosci"
-        android:padding="5dp"
-        android:textColorLink="@android:color/black"
-        app:customFont="fonts/Oswald-Light.ttf"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="16dp" />
-
-    <com.zerter.teamconnect.Controlers.MyButton
-        android:id="@+id/button_wyslij"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="15dp"
-        android:background="?android:selectableItemBackground"
-        android:elevation="0dp"
-        android:fontFamily="cursive"
-        android:text="@string/send_button"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintTop_toBottomOf="@+id/editText_tresc_smsa"
-        tools:layout_editor_absoluteX="182dp"
-        app:customFont="fonts/Oswald-Bold.ttf"/>
 
     <ListView
         android:id="@+id/ListViewListaGrupKontaktow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/editText_tresc_smsa"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:background="@color/colorPrimaryDark" />
+        android:layout_above="@+id/messageLineSeparate"
+        android:layout_marginBottom="5dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/messageLineSeparate"
+        android:background="#fff"
+        android:layout_above="@+id/SMSContener"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/SMSContener"
+        android:paddingTop="10dp">
+
+        <com.zerter.teamconnect.Controlers.MyEditText
+            android:id="@+id/editText_tresc_smsa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="top|start"
+            android:hint="@string/hint_pola_wiadomosci"
+            android:padding="5dp"
+            app:customFont="fonts/Oswald-Light.ttf"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="50dp" />
+        <com.zerter.teamconnect.Controlers.MyButton
+            android:id="@+id/button_wyslij"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="?android:selectableItemBackground"
+            android:elevation="0dp"
+            android:fontFamily="cursive"
+            android:text="@string/send_button"
+            android:textColor="@android:color/background_light"
+            app:customFont="fonts/Oswald-Bold.ttf"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/editText_tresc_smsa"/>
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
 

@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 
+import com.github.aakira.expandablelayout.ExpandableLayout;
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.github.aakira.expandablelayout.ExpandableWeightLayout;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MyTextView;
@@ -63,6 +66,7 @@ public class HistoryMessageFragment extends Fragment {
         team.setName("DUPA");
         message.setTeam(team);
         message.setMessage("Treść wiadomości\n  messageList.add(message);\n private class ListAdapterMessage extends ArrayAdapter<Message> {");
+//        message.setMessage("Treść wiadomości");
         List<Message> messageList = new ArrayList<>();
         for(int i = 0; i< 15;i++){
             messageList.add(message);
@@ -83,6 +87,7 @@ public class HistoryMessageFragment extends Fragment {
             this.context = context;
         }
 
+
         @NonNull
         @Override
         public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -101,17 +106,30 @@ public class HistoryMessageFragment extends Fragment {
                 team.setText("n/a");
                 msg.setText("n/a");
             }
+
+
             team.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    expandableLayout.setVisibility(View.VISIBLE);
                     msg.measure(0, 0);
                     expandableLayout.setMinimumHeight(msg.getMeasuredHeight() + 70);
                     expandableLayout.toggle();
+// expand
                     expandableLayout.expand();
+// collapse
                     expandableLayout.collapse();
+
+// move position of child view
+//                    expandableLayout.moveChild(0);
+// move optional position
+//                    expandableLayout.move(500);
+
+// set base position which is close position
+//                    expandableLayout.setClosePosition(500);
                 }
             });
-
+            expandableLayout.setVisibility(View.GONE);
 
             return convertView;
         }
