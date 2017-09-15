@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableWeightLayout;
 import com.zerter.teamconnect.Controlers.Data;
@@ -111,8 +110,6 @@ public class HistoryMessageFragment extends Fragment {
                     = (ExpandableWeightLayout) convertView.findViewById(R.id.expandableLayout);
             final MyTextView team = (MyTextView) convertView.findViewById(R.id.teamName);
             final MyTextView msg = (MyTextView) convertView.findViewById(R.id.messageHistory);
-//            final View top = convertView.findViewById(R.id.ExpandableTop);
-//            final View botton = convertView.findViewById(R.id.ExpandableBotton);
             if (message != null) {
                 team.setText(message.getTeam().getName());
 
@@ -120,32 +117,49 @@ public class HistoryMessageFragment extends Fragment {
                 team.setText("n/a");
 
             }
+
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    if (msg.getVisibility() == View.GONE){
-                        msg.setVisibility(View.VISIBLE);
-                    }
-
                     if (message != null) {
                         msg.setText(message.getMessage());
                         msg.measure(0, 0);
 
-                        int a= (int) ((msg.getMeasuredHeight() * 1.3));
-                        int b = msg.getBaseline();
-                        int c =(int) (b * 20);
-                        expandableLayout.setMinimumHeight(c);
-                        Toast.makeText(getActivity(),"a: " + a+
-                                "\nb: "+b +
-                                "c: " + c,Toast.LENGTH_LONG).show();
+
+//                        Toast.makeText(getActivity(),
+//                                        "a: " + a +
+//                                        "\nb: " + b +
+//                                        "\nc: " + c +
+//                                        "\nheight: " + expandableLayout.getHeight()+
+//                                        "\nh: " + h,
+//                                Toast.LENGTH_LONG).show();
 
                     } else {
                         msg.setText("n/a");
                     }
-                    expandableLayout.toggle();
-                    expandableLayout.expand();
-                    expandableLayout.collapse();
+
+                    if (msg.getVisibility() == View.GONE) {
+                        msg.setVisibility(View.VISIBLE);
+
+                        expandableLayout.toggle();
+                        expandableLayout.expand();
+                        expandableLayout.collapse();
+                        int a = (int) (msg.getLineCount()) + 1;
+                        int b = msg.getLineHeight() ;
+                        int c = (int) (b * a) ;
+                        int h = (int) (c * 1.2) ;
+                        expandableLayout.setMinimumHeight(h);
+                    }else {
+                        expandableLayout.toggle();
+                        expandableLayout.expand();
+                        expandableLayout.collapse();
+                        int a = (int) (msg.getLineCount());
+                        int b = msg.getLineHeight() ;
+                        int c = (int) (b * a) ;
+                        int h = (int) (c * 1.2);
+                        expandableLayout.setMinimumHeight(h);
+                    }
+
 
 
 //                    if (msg.getVisibility() == View.VISIBLE){

@@ -65,7 +65,6 @@
                     android:gravity="top"
                     android:textColor="#ffff"
                     android:textSize="18sp"
-                    android:visibility="gone"
                     app:customFont="fonts/Oswald-Light.ttf" />
             </com.github.aakira.expandablelayout.ExpandableWeightLayout>
 
