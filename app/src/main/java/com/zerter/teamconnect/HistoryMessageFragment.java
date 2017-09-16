@@ -2,6 +2,7 @@ package com.zerter.teamconnect;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.github.aakira.expandablelayout.ExpandableWeightLayout;
@@ -115,6 +117,7 @@ public class HistoryMessageFragment extends Fragment {
             final MyTextView team = (MyTextView) convertView.findViewById(R.id.teamName);
             final MyTextView msg = (MyTextView) convertView.findViewById(R.id.messageHistory);
             final MyTextView date = (MyTextView) convertView.findViewById(R.id.historyDate);
+            final ImageView arrow = (ImageView) convertView.findViewById(R.id.historyArrow);
             if (message != null) {
                 team.setText(message.getTeam().getName());
                 msg.setText(message.getMessage());
@@ -132,6 +135,15 @@ public class HistoryMessageFragment extends Fragment {
                     expandableLayout.toggle();
                     expandableLayout.expand();
                     expandableLayout.collapse();
+
+
+                    if (expandableLayout.isExpanded())
+                        arrow.setImageBitmap( BitmapFactory.decodeResource(getActivity().getResources(),
+                                R.drawable.ic_arrow_down_drop_circle_outline_white_24dp));
+                    else {
+                        arrow.setImageBitmap( BitmapFactory.decodeResource(getActivity().getResources(),
+                                R.drawable.ic_arrow_up_drop_circle_outline_white_24dp));
+                    }
                 }
             });
             return convertView;

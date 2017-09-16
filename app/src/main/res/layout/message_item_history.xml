@@ -32,7 +32,8 @@
             android:textColor="#ffff"
             android:textSize="24sp"
             app:customFont="fonts/Oswald-Stencil.ttf"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/historyArrow"/>
         <com.zerter.teamconnect.Controlers.MyTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,6 +44,14 @@
             app:customFont="fonts/Oswald-LightItalic.ttf"
             android:layout_marginTop="10dp"
             android:id="@+id/historyDate"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/historyArrow"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_arrow_down_drop_circle_outline_white_24dp" />
     </RelativeLayout>
 
     <LinearLayout
