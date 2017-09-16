@@ -58,16 +58,15 @@ public class HistoryMessageFragment extends Fragment {
     public void setAdapter() {
         Message message = new Message();
         Team team = new Team();
-        team.setName("DUPA");
+        team.setName("Nazwa Grupy");
         message.setTeam(team);
-        message.setMessage("Treść wiadomości\n  messageList.add(message);\n private class ListAdapterMessage extends ArrayAdapter<Message> {");
+        message.setMessage("Treść wiadomości\n aaaa\n bcdf");
         List<Message> messageList = new ArrayList<>();
 
         messageList.add(message);
         message = new Message();
         message.setTeam(team);
         message.setMessage("asdas asd asd asd as\nasd as das d\nasd asd fsd\nsda fsdf d gdf sd \nsd gdsfg dsf gsd\nfg dsdf gsdf \nsdf sdf gsdfg sd gsd asd asd as\nasd as das dasd asd fsdsda fsdf d gdf sd sd gdsfg dsf gsd\nfg ds");
-        messageList.add(message);
         messageList.add(message);
         message = new Message();
         message.setTeam(team);
@@ -96,14 +95,15 @@ public class HistoryMessageFragment extends Fragment {
         ListAdapterMessage(@NonNull Activity context, List<Message> messageList) {
             super(context, R.layout.grupa_kontaktow, messageList);
             this.context = context;
+            this.messageList = messageList;
         }
 
 
         @NonNull
         @Override
-        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            final Message message = getItem(position);
-
+        public View getView(final int position, View convertView, ViewGroup parent) {
+//            final Message message = getItem(position);
+            final Message message = this.messageList.get(position);
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.message_item_history, null, true);
             final ExpandableWeightLayout expandableLayout
@@ -112,7 +112,7 @@ public class HistoryMessageFragment extends Fragment {
             final MyTextView msg = (MyTextView) convertView.findViewById(R.id.messageHistory);
             if (message != null) {
                 team.setText(message.getTeam().getName());
-
+                msg.setText(message.getMessage());
             } else {
                 team.setText("n/a");
 
@@ -121,47 +121,20 @@ public class HistoryMessageFragment extends Fragment {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (message != null) {
-                        msg.setText(message.getMessage());
-                        msg.measure(0, 0);
-
-
-//                        Toast.makeText(getActivity(),
-//                                        "a: " + a +
-//                                        "\nb: " + b +
-//                                        "\nc: " + c +
-//                                        "\nheight: " + expandableLayout.getHeight()+
-//                                        "\nh: " + h,
-//                                Toast.LENGTH_LONG).show();
-
-                    } else {
-                        msg.setText("n/a");
-                    }
-
+//                        msg.measure(0, 0);
                     if (msg.getVisibility() == View.GONE) {
                         msg.setVisibility(View.VISIBLE);
-
-                        expandableLayout.toggle();
-                        expandableLayout.expand();
-                        expandableLayout.collapse();
-                        int a = (int) (msg.getLineCount()) + 1;
-                        int b = msg.getLineHeight() ;
-                        int c = (int) (b * a) ;
-                        int h = (int) (c * 1.2) ;
-                        expandableLayout.setMinimumHeight(h);
-                    }else {
-                        expandableLayout.toggle();
-                        expandableLayout.expand();
-                        expandableLayout.collapse();
-                        int a = (int) (msg.getLineCount());
-                        int b = msg.getLineHeight() ;
-                        int c = (int) (b * a) ;
-                        int h = (int) (c * 1.2);
-                        expandableLayout.setMinimumHeight(h);
                     }
 
+                    int a = (int) (msg.getLineCount()) ;
+                    int b = msg.getLineHeight() ;
+                    int c = (int) (b * a) ;
+                    int h = (int) (c * 1.2) ;
+                    expandableLayout.setMinimumHeight(h);
 
-
+                    expandableLayout.toggle();
+                    expandableLayout.expand();
+                    expandableLayout.collapse();
 //                    if (msg.getVisibility() == View.VISIBLE){
 //                        msg.setVisibility(View.GONE);
 //                    }
