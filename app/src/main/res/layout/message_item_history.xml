@@ -33,6 +33,16 @@
             android:textSize="24sp"
             app:customFont="fonts/Oswald-Stencil.ttf"
             android:layout_centerVertical="true"/>
+        <com.zerter.teamconnect.Controlers.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/teamName"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#ffff"
+            app:customFont="fonts/Oswald-LightItalic.ttf"
+            android:layout_marginTop="10dp"
+            android:id="@+id/historyDate"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -54,7 +64,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="100"
                 app:ael_duration="1000"
-                app:ael_interpolator="linear">
+                app:ael_interpolator="overshoot">
 
                 <com.zerter.teamconnect.Controlers.MyTextView
                     android:id="@+id/messageHistory"

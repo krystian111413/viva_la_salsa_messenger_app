@@ -61,16 +61,19 @@ public class HistoryMessageFragment extends Fragment {
         team.setName("Nazwa Grupy");
         message.setTeam(team);
         message.setMessage("Treść wiadomości\n aaaa\n bcdf");
+        message.setDate("15:49 11.09.1992");
         List<Message> messageList = new ArrayList<>();
 
         messageList.add(message);
         message = new Message();
         message.setTeam(team);
         message.setMessage("asdas asd asd asd as\nasd as das d\nasd asd fsd\nsda fsdf d gdf sd \nsd gdsfg dsf gsd\nfg dsdf gsdf \nsdf sdf gsdfg sd gsd asd asd as\nasd as das dasd asd fsdsda fsdf d gdf sd sd gdsfg dsf gsd\nfg ds");
+        message.setDate("12:15 11.09.2017");
         messageList.add(message);
         message = new Message();
         message.setTeam(team);
         message.setMessage("start asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd end ");
+        message.setDate("16:00 16.05.2003");
         messageList.add(message);
         message = new Message();
         message.setTeam(team);
@@ -80,6 +83,7 @@ public class HistoryMessageFragment extends Fragment {
                 "zwłaszcza znajdujących sie na czele listy, należy użyć linku „zaznacz fragmenty”\n" +
                 "i sprawdzić, czy są one przede wszystkim krótkimi frazami rozrzuconymi po całym\n" +
                 "dokumencie (w takiej sytuacji można je uznać za przypadkowe zapożyczenia), czy ");
+        message.setDate("17:55 06.01.1969");
         messageList.add(message);
 
         ListAdapterMessage listAdapterMessage = new ListAdapterMessage(getActivity(), messageList);
@@ -110,37 +114,26 @@ public class HistoryMessageFragment extends Fragment {
                     = (ExpandableWeightLayout) convertView.findViewById(R.id.expandableLayout);
             final MyTextView team = (MyTextView) convertView.findViewById(R.id.teamName);
             final MyTextView msg = (MyTextView) convertView.findViewById(R.id.messageHistory);
+            final MyTextView date = (MyTextView) convertView.findViewById(R.id.historyDate);
             if (message != null) {
                 team.setText(message.getTeam().getName());
                 msg.setText(message.getMessage());
+                date.setText(message.getDate());
             } else {
                 team.setText("n/a");
 
             }
-
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                        msg.measure(0, 0);
                     if (msg.getVisibility() == View.GONE) {
                         msg.setVisibility(View.VISIBLE);
                     }
-
-                    int a = (int) (msg.getLineCount()) ;
-                    int b = msg.getLineHeight() ;
-                    int c = (int) (b * a) ;
-                    int h = (int) (c * 1.2) ;
-                    expandableLayout.setMinimumHeight(h);
-
                     expandableLayout.toggle();
                     expandableLayout.expand();
                     expandableLayout.collapse();
-//                    if (msg.getVisibility() == View.VISIBLE){
-//                        msg.setVisibility(View.GONE);
-//                    }
                 }
             });
-
             return convertView;
         }
     }
