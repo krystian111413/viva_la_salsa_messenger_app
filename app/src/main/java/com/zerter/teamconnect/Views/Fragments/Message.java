@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -39,6 +38,7 @@ public class Message extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_message,container,false);
+
         wyslij = (Button) view.findViewById(R.id.button_wyslij);
         editTextTrescWiadomosci = (EditText) view.findViewById(R.id.editText_tresc_smsa);
         listView = (ListView) view.findViewById(R.id.ListViewListaGrupKontaktow);
@@ -49,6 +49,7 @@ public class Message extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         data = new Data(getActivity());
         setAdapter();
         wyslij.setOnClickListener(new View.OnClickListener() {

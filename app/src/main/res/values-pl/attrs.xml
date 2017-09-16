@@ -3,4 +3,6 @@
     <declare-styleable name="MyTextView">
         <attr name="customFont" format="string"/>
     </declare-styleable>
+
 </resources>
+

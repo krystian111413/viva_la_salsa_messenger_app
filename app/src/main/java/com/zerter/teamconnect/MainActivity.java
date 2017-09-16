@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
     private TextView mTextMessage;
     Message message = new Message();
     MenageGroupContacts menageGroupContacts = new MenageGroupContacts();
-    EdytujGrupyFragment edytujGrupyFragment = new EdytujGrupyFragment();
+    HistoryMessageFragment historyMessageFragment = new HistoryMessageFragment();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
-                    FT.replace(R.id.content, edytujGrupyFragment);
+                    FT.replace(R.id.content, historyMessageFragment);
                     FT.commit();
                     return true;
             }
@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
 
         FragmentManager FM = getFragmentManager();
         FragmentTransaction FT = FM.beginTransaction();
-        FT.addToBackStack("EdytujGrupyFragment");
+        FT.addToBackStack("HistoryMessageFragment");
         Message fragment = new Message();
         FT.add(R.id.content, fragment);
         FT.commit();

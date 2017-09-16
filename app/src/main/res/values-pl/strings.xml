@@ -9,7 +9,9 @@
     <string name="history">Historia</string>
     <string name="menage_teams">Zarządzaj grupą</string>
     <string name="send_message">Wyślij wiadomość</string>
-    <string name="app_name" translatable="false"></string>
     <string name="templates">Szablony</string>
     <string name="add_team">Dodaj grupe</string>
+    <string name="Empty">Brak</string>
+    <string name="plan">Zaplanuj</string>
+    <string name="add_contact">Dodaj kontakt</string>
 </resources>
