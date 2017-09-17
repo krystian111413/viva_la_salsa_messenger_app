@@ -84,9 +84,9 @@ public class NadpiszNazwęGrupy extends DialogFragment {
 
     public void setAdapter() {
         if (data.wczytajGrupyKontaktow() != null) {
-            ListAdapterEditContacts adapter = new ListAdapterEditContacts(getActivity(), data.wczytajGrupyKontaktow());
+//            ListAdapterEditContacts adapter = new ListAdapterEditContacts(getActivity(), data.wczytajGrupyKontaktow());
 
-            HistoryMessageFragment.listView.setAdapter(adapter);
+//            HistoryMessageFragment.listView.setAdapter(adapter);
         }
     }
 
