@@ -52,13 +52,19 @@ public class MenageTemplates extends Fragment {
                     templates = new ArrayList<Template>();
                 }
                 templates.add(new Template());
-                setAdapter(templates);
+                setAdapter(templates, true);
+
 
             }
         });
 
     }
-
+    public void setAdapter(List<Template> templates , Boolean focus) {
+        if (templates != null){
+            ListAdapterTemplates adapter = new ListAdapterTemplates(getActivity(), templates, focus);
+            listView.setAdapter(adapter);
+        }
+    }
     public void setAdapter(List<Template> templates) {
         if (templates != null){
             ListAdapterTemplates adapter = new ListAdapterTemplates(getActivity(), templates);
@@ -66,10 +72,16 @@ public class MenageTemplates extends Fragment {
         }
     }
     private class ListAdapterTemplates extends ArrayAdapter<Template> {
+        Boolean focus = false;
         List<Template> templates = null;
         public ListAdapterTemplates(@NonNull Context context, List<Template> templates) {
             super(context, 0, templates);
             this.templates = templates;
+        }
+        public ListAdapterTemplates(@NonNull Context context, List<Template> templates, Boolean focus) {
+            super(context, 0, templates);
+            this.templates = templates;
+            this.focus = focus;
         }
 
         @NonNull
@@ -132,7 +144,9 @@ public class MenageTemplates extends Fragment {
                 }
             });
 
-
+            if (focus && (templates.size()-1) == position){
+                text.requestFocus();
+            }
 
             return convertView;
         }
