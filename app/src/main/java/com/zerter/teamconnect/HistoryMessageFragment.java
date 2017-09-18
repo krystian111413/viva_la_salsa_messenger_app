@@ -18,9 +18,9 @@ import com.github.aakira.expandablelayout.ExpandableWeightLayout;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MyTextView;
 import com.zerter.teamconnect.Models.Message;
-import com.zerter.teamconnect.Models.Team;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HistoryMessageFragment extends Fragment {
@@ -58,37 +58,12 @@ public class HistoryMessageFragment extends Fragment {
 
 
     public void setAdapter() {
-        Message message = new Message();
-        Team team = new Team();
-        team.setName("Nazwa Grupy");
-        message.setTeam(team);
-        message.setMessage("Treść wiadomości\n aaaa\n bcdf");
-        message.setDate("15:49 11.09.1992");
         List<Message> messageList = new ArrayList<>();
-
-        messageList.add(message);
-        message = new Message();
-        message.setTeam(team);
-        message.setMessage("asdas asd asd asd as\nasd as das d\nasd asd fsd\nsda fsdf d gdf sd \nsd gdsfg dsf gsd\nfg dsdf gsdf \nsdf sdf gsdfg sd gsd asd asd as\nasd as das dasd asd fsdsda fsdf d gdf sd sd gdsfg dsf gsd\nfg ds");
-        message.setDate("12:15 11.09.2017");
-        messageList.add(message);
-        message = new Message();
-        message.setTeam(team);
-        message.setMessage("start asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd asd asdas asd asd end ");
-        message.setDate("16:00 16.05.2003");
-        messageList.add(message);
-        message = new Message();
-        message.setTeam(team);
-        message.setMessage("Przeanalizować pozostałe listy, zwracając szczególną uwagę na dokumenty\n" +
-                "zawierające fragmenty o długości przekraczającej limit Współczynnika podobieństwa\n" +
-                "2 (są one oznaczone pogrubioną czcionką). W przypadku takich dokumentów,\n" +
-                "zwłaszcza znajdujących sie na czele listy, należy użyć linku „zaznacz fragmenty”\n" +
-                "i sprawdzić, czy są one przede wszystkim krótkimi frazami rozrzuconymi po całym\n" +
-                "dokumencie (w takiej sytuacji można je uznać za przypadkowe zapożyczenia), czy ");
-        message.setDate("17:55 06.01.1969");
-        messageList.add(message);
-
+        if (data.getMessages() != null){
+            messageList = data.getMessages();
+        }
         ListAdapterMessage listAdapterMessage = new ListAdapterMessage(getActivity(), messageList);
+        Collections.reverse(messageList);
         listView.setAdapter(listAdapterMessage);
     }
 
@@ -104,14 +79,17 @@ public class HistoryMessageFragment extends Fragment {
             this.messageList = messageList;
         }
 
-
+        List<View> viewList = new ArrayList<>();
         @NonNull
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-//            final Message message = getItem(position);
             final Message message = this.messageList.get(position);
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.message_item_history, null, true);
+            if (viewList.size() > position && viewList.get(position) != null){
+                return viewList.get(position);
+            }
+
             final ExpandableWeightLayout expandableLayout
                     = (ExpandableWeightLayout) convertView.findViewById(R.id.expandableLayout);
             final MyTextView team = (MyTextView) convertView.findViewById(R.id.teamName);
@@ -119,7 +97,7 @@ public class HistoryMessageFragment extends Fragment {
             final MyTextView date = (MyTextView) convertView.findViewById(R.id.historyDate);
             final ImageView arrow = (ImageView) convertView.findViewById(R.id.historyArrow);
             if (message != null) {
-                team.setText(message.getTeam().getName());
+                team.setText(message.getGroup().getName());
                 msg.setText(message.getMessage());
                 date.setText(message.getDate());
             } else {
