@@ -10,7 +10,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zerter.teamconnect.Models.Contacts;
 import com.zerter.teamconnect.Models.Group;
+import com.zerter.teamconnect.Models.Message;
 import com.zerter.teamconnect.Models.Person;
+import com.zerter.teamconnect.Models.Template;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +30,37 @@ public class Data {
         this.context = context;
     }
 
+    public void clearData(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    public void setMessages(String value){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("messages", value);
+        editor.apply();
+    }
+    public List<Message> getMessages(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String s = sharedPreferences.getString("messages", "");
+        java.lang.reflect.Type type = new TypeToken<List<Message>>(){}.getType();
+        return new Gson().fromJson(s,type);
+    }
+    public void setTemplates(String value){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("templates", value);
+        editor.apply();
+    }
+    public List<Template> getTemplates(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String s = sharedPreferences.getString("templates", "");
+        java.lang.reflect.Type type = new TypeToken<List<Template>>(){}.getType();
+        return new Gson().fromJson(s,type);
+    }
     public void zapiszGrupyKontaktow(String value){
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -70,6 +103,9 @@ public class Data {
 
     public List<String> getGroupsNames(){
         List<String> names = new ArrayList<>();
+        if (getGroups()==null){
+            return names;
+        }
         for (Group group :
                 getGroups()) {
             names.add(group.getName());

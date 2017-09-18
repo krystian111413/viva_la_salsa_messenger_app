@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.zerter.teamconnect.Controlers.CustomTypefaceSpan;
@@ -29,6 +31,7 @@ import com.zerter.teamconnect.Controlers.PermisionControler.OnResultListener;
 import com.zerter.teamconnect.HistoryMessageFragment;
 import com.zerter.teamconnect.R;
 import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
+import com.zerter.teamconnect.Views.Fragments.MenageTemplates;
 import com.zerter.teamconnect.Views.Fragments.Message;
 
 public class GeneralActivity extends AppCompatActivity
@@ -74,6 +77,8 @@ public class GeneralActivity extends AppCompatActivity
         setContener(message);
         fab.hide();
         setFontsOnMenu(navigationView);
+        hideSoftKeyboard();
+        permisionAccessSendSMS();
     }
 
     @Override
@@ -136,7 +141,13 @@ public class GeneralActivity extends AppCompatActivity
             HistoryMessageFragment historyMessageFragment = new HistoryMessageFragment();
             setContener(historyMessageFragment);
 
+        }else if (id == R.id.nav_template) {
+            MenageTemplates menageTemplates = new MenageTemplates();
+            setContener(menageTemplates);
+
         }
+
+
         if (id == R.id.nav_send_msg) {
             fab.hide();
         }else {
@@ -226,7 +237,22 @@ public class GeneralActivity extends AppCompatActivity
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
-                return;
+            }
+            case MY_PERMISSIONS_REQUEST_SEND_SMS : {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    Toast.makeText(this,"accepted",Toast.LENGTH_SHORT).show();
+
+
+                } else {
+                    Toast.makeText(this,"denied",Toast.LENGTH_SHORT).show();
+
+                    finish();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
             }
 
             // other 'case' lines to check for other
@@ -258,5 +284,32 @@ public class GeneralActivity extends AppCompatActivity
             listener.onResultAccepted();
         }
     }
+    public void hideSoftKeyboard() {
+        if(getCurrentFocus()!=null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+    }
 
+    public static void sendSMS(String phoneNumber, String message) {
+        Log.d("sendSMS","numer: " + phoneNumber);
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNumber, null, message, null, null);
+    }
+
+    public void permisionAccessSendSMS() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.SEND_SMS)) {
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.SEND_SMS},
+                        MY_PERMISSIONS_REQUEST_SEND_SMS);
+
+            }
+        }
+    }
 }
