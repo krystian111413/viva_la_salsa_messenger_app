@@ -54,6 +54,28 @@ public class Data {
         editor.apply();
     }
 
+    public void updateGroup(Group original, Group newGroup){
+        List<Group> groupList = getGroups();
+        List<Group> newGroupList = new ArrayList<>();
+        for (Group group :
+                groupList) {
+            if (group.getName().equals(original.getName())){
+                newGroupList.add(newGroup);
+            }else {
+                newGroupList.add(group);
+            }
+        }
+        setGroups(new  Gson().toJson(newGroupList));
+    }
+
+    public List<String> getGroupsNames(){
+        List<String> names = new ArrayList<>();
+        for (Group group :
+                getGroups()) {
+            names.add(group.getName());
+        }
+        return names;
+    }
     public List<Person> getContacts() {
         List<Person> personList = new ArrayList<>();
         Cursor phones = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);

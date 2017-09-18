@@ -31,4 +31,6 @@
     <string name="Empty">Empty</string>
     <string name="plan">Plan</string>
     <string name="add_contact">Add Contact</string>
+    <string name="Update">Update</string>
+    <string name="group_alredy_exist">A group with that name already exists</string>
 </resources>

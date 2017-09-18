@@ -108,7 +108,6 @@ public class HistoryMessageFragment extends Fragment {
         @NonNull
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-//            final Message message = getItem(position);
             final Message message = this.messageList.get(position);
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.message_item_history, null, true);

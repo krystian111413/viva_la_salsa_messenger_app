@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.zerter.teamconnect.Controlers.CustomTypefaceSpan;
 import com.zerter.teamconnect.Controlers.PermisionControler.OnResultListener;
-import com.zerter.teamconnect.Controlers.PermisionControler.PermisionControler;
 import com.zerter.teamconnect.HistoryMessageFragment;
 import com.zerter.teamconnect.R;
 import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
@@ -211,13 +210,11 @@ public class GeneralActivity extends AppCompatActivity
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
-        Toast.makeText(this,"onRequestPermissionsResult",Toast.LENGTH_SHORT).show();
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_CONTACTS : {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this,"accepted",Toast.LENGTH_SHORT).show();
                     MenageGroupContacts menageGroupContacts = new MenageGroupContacts();
                     setContener(menageGroupContacts);
                     // permission was granted, yay! Do the

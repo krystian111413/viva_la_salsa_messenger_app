@@ -1,32 +1,25 @@
 package com.zerter.teamconnect.Dialogs;
 
 import android.app.DialogFragment;
-import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.zerter.teamconnect.Controlers.Cache;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MenageView.ListAdapterGroups;
-import com.zerter.teamconnect.Controlers.MyTextView;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.Models.Person;
-import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
-import com.zerter.teamconnect.Models.Contacts;
 import com.zerter.teamconnect.R;
+import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +35,7 @@ public class ConfirmCreateGroup extends DialogFragment {
     Data data;
 
     List<Person> selectedContacts = new ArrayList<>();
-
+    private String TAG = getClass().getName();
 
     @Nullable
     @Override
@@ -64,13 +57,25 @@ public class ConfirmCreateGroup extends DialogFragment {
             java.lang.reflect.Type type = new TypeToken<List<Person>>(){}.getType();
             String list = bundle.getString("selected_contacts");
             selectedContacts = new Gson().fromJson(list,type);
+            if (selectedContacts != null) {
+                for (Person p :
+                        selectedContacts) {
+                    Log.d(TAG, "contact name: " + p.getName());
+                }
+            }else {
+                Log.d(TAG,"NO CONTACTS");
+            }
         }
+
         buttonZapisz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (nazwaGrupy.getText().toString().isEmpty()) {
                     Toast.makeText(getActivity(), "Wprowadź nazwę grupy", Toast.LENGTH_LONG).show();
-                } else {
+                } else if (data.getGroupsNames().contains(nazwaGrupy.getText().toString())){
+                    Toast.makeText(getActivity(), R.string.group_alredy_exist,Toast.LENGTH_SHORT).show();
+                }
+                else {
                     Group group = new Group();
                     group.setPersons(selectedContacts);
                     group.setName(nazwaGrupy.getText().toString());

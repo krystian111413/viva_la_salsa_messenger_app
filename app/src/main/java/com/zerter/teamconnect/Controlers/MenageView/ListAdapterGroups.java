@@ -13,7 +13,6 @@ import android.widget.ImageButton;
 import com.google.gson.Gson;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MyTextView;
-import com.zerter.teamconnect.Models.Contacts;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.R;
 import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
@@ -71,7 +70,7 @@ public class ListAdapterGroups extends ArrayAdapter<Group> {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ListAdapterContacts listAdapterContacts = new ListAdapterContacts((Activity) context,data.getContacts(),grupa.getPersons());
+                ListAdapterContacts listAdapterContacts = new ListAdapterContacts((Activity) context,data.getContacts(),grupa);
                 if (MenageGroupContacts.listView != null){
                     MenageGroupContacts.listView.setAdapter(listAdapterContacts);
                 }
