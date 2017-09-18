@@ -83,9 +83,23 @@ public class GeneralActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if(!MenageGroupContacts.groupView){
+            permisionAccessReadConstacts(new OnResultListener() {
+                @Override
+                public void onResultAccepted() {
+                    MenageGroupContacts menageGroupContacts = new MenageGroupContacts();
+                    setContener(menageGroupContacts);
+                }
+
+                @Override
+                public void onResultDenyed() {
+
+                }
+            });
         } else {
             super.onBackPressed();
         }
@@ -312,4 +326,6 @@ public class GeneralActivity extends AppCompatActivity
             }
         }
     }
+
+
 }
