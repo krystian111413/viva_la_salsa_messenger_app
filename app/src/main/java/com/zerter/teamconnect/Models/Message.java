@@ -7,7 +7,7 @@ package com.zerter.teamconnect.Models;
 public class Message {
     private String message;
     private String date;
-    private Team team = new Team();
+    private Group group = new Group();
 
     public String getMessage() {
         return message;
@@ -25,11 +25,12 @@ public class Message {
         this.date = date;
     }
 
-    public Team getTeam() {
-        return team;
+
+    public Group getGroup() {
+        return group;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

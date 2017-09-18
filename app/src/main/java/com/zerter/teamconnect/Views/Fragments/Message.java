@@ -1,13 +1,11 @@
 package com.zerter.teamconnect.Views.Fragments;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.zerter.teamconnect.Controlers.Cache;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MyTextView;
-import com.zerter.teamconnect.Models.Contacts;
+import com.zerter.teamconnect.Dialogs.SelectGroupToSendMessage;
+import com.zerter.teamconnect.Models.Template;
 import com.zerter.teamconnect.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Message extends Fragment {
@@ -55,58 +52,56 @@ public class Message extends Fragment {
         wyslij.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<Contacts> zaznaczoneGrupy = Cache.ZAZNACZONE_GRUPY;
-                for (int i = 0; i < zaznaczoneGrupy.size(); i++){
-                    for (int j = 0; j < zaznaczoneGrupy.get(i).getPersons().size(); j++){
-                        sendSMS(zaznaczoneGrupy.get(i).getPersons().get(j).getNumber(),editTextTrescWiadomosci.getText().toString().trim());
-//                        Log.d(TAG,zaznaczoneGrupy.get(i).getPersons().get(j).getNumber());
-                    }
-                }
-                new AlertDialog.Builder(getActivity())
-                        .setMessage("Wiadomość została wysłana")
-                        .show();
-                editTextTrescWiadomosci.getText().clear();
+                FragmentManager manager = getFragmentManager();
+                SelectGroupToSendMessage sendMessaegeDialog = new SelectGroupToSendMessage();
+                Bundle bundle = new Bundle();
+                bundle.putString("message", editTextTrescWiadomosci.getText().toString());
+                sendMessaegeDialog.setArguments(bundle);
+                sendMessaegeDialog.show(manager, "SelectGroupToSendMessage");
+                editTextTrescWiadomosci.setText("");
             }
         });
     }
 
 
 
-    private void sendSMS(String phoneNumber, String message) {
-        SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(phoneNumber, null, message, null, null);
-    }
+
     private void setAdapter(){
-        if (data.wczytajGrupyKontaktow() != null){
-            ListAdapterContacts adapter = new ListAdapterContacts(getActivity(),data.wczytajGrupyKontaktow());
+        if (data.getTemplates() != null){
+            ListAdapterTemplates adapter = new ListAdapterTemplates(getActivity(),data.getTemplates());
             listView.setAdapter(adapter);
         }
     }
-    class ListAdapterContacts extends ArrayAdapter<Contacts> {
+    private class ListAdapterTemplates extends ArrayAdapter<Template> {
 
-        private Typeface typeFace;
-        public ListAdapterContacts(@NonNull Context context, List<Contacts> kontakty) {
-            super(context, 0, kontakty);
-            Cache.ZAZNACZONE_GRUPY = new ArrayList<>();
-            this.typeFace=Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Light.ttf");
+        public ListAdapterTemplates(@NonNull Context context, List<Template> templates) {
+            super(context, 0, templates);
         }
 
         @NonNull
         @Override
         public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            final Contacts grupa = getItem(position);
+            final Template template = getItem(position);
 
             if (convertView == null){
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.grupa_kontaktow,parent,false);
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.template_item_list,parent,false);
             }
-            final MyTextView myTextView = (MyTextView) convertView.findViewById(R.id.myTextViewContacts);
-            if (grupa != null) {
-                myTextView.setText(grupa.getName());
+            final MyTextView myTextView = (MyTextView) convertView.findViewById(R.id.templateTextView);
+            if (template != null) {
+                myTextView.setText(template.getText());
             }else {
                 myTextView.setText("n/a");
             }
 
+            myTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    editTextTrescWiadomosci.setText(myTextView.getText().toString());
+                }
+            });
             return convertView;
         }
+
+
     }
 }
