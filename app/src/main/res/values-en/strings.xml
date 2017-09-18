@@ -12,4 +12,6 @@
     <string name="templates">Templates</string>
     <string name="add_team">Add Team</string>
     <string name="Empty">Empty</string>
+    <string name="plan">Plan</string>
+    <string name="add_contact">Add Contact</string>
 </resources>
