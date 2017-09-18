@@ -20,4 +20,5 @@
     <string name="write_your_template">Napisz swój szablon...</string>
     <string name="select_a_group">Wybierz grupe</string>
     <string name="Message_was_sent">Wiadomość została wysłana</string>
+    <string name="select_template">Wybierz szablon</string>
 </resources>

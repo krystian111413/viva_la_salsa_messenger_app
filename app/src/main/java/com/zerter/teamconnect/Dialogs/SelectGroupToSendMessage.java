@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,9 +94,9 @@ public class SelectGroupToSendMessage extends DialogFragment {
                     messageList.add(msg);
                     data.setMessages(new Gson().toJson(messageList));
                 }
-                new AlertDialog.Builder(getActivity())
-                        .setMessage(R.string.Message_was_sent)
-                        .show();
+                Toast.makeText(getActivity(),R.string.Message_was_sent,Toast.LENGTH_LONG).show();
+                dismiss();
+
             }
         });
     }
