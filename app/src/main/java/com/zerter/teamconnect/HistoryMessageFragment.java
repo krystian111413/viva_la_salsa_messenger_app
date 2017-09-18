@@ -104,14 +104,17 @@ public class HistoryMessageFragment extends Fragment {
             this.messageList = messageList;
         }
 
-
+        List<View> viewList = new ArrayList<>();
         @NonNull
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-//            final Message message = getItem(position);
             final Message message = this.messageList.get(position);
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.message_item_history, null, true);
+            if (viewList.size() > position && viewList.get(position) != null){
+                return viewList.get(position);
+            }
+
             final ExpandableWeightLayout expandableLayout
                     = (ExpandableWeightLayout) convertView.findViewById(R.id.expandableLayout);
             final MyTextView team = (MyTextView) convertView.findViewById(R.id.teamName);
