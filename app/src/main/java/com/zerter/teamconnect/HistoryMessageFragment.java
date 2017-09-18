@@ -20,6 +20,7 @@ import com.zerter.teamconnect.Controlers.MyTextView;
 import com.zerter.teamconnect.Models.Message;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HistoryMessageFragment extends Fragment {
@@ -62,6 +63,7 @@ public class HistoryMessageFragment extends Fragment {
             messageList = data.getMessages();
         }
         ListAdapterMessage listAdapterMessage = new ListAdapterMessage(getActivity(), messageList);
+        Collections.reverse(messageList);
         listView.setAdapter(listAdapterMessage);
     }
 
