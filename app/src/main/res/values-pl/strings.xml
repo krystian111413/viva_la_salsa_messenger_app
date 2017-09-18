@@ -12,4 +12,8 @@
     <string name="templates">Szablony</string>
     <string name="add_team">Dodaj grupe</string>
     <string name="Empty">Brak</string>
+    <string name="plan">Zaplanuj</string>
+    <string name="add_contact">Dodaj kontakt</string>
+    <string name="Update">Aktualizuj</string>
+    <string name="group_alredy_exist">Grupa o takiej nazwie już istnieje.</string>
 </resources>

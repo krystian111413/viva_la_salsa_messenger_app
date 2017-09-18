@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/contactImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/hiphop"
+            app:civ_border_color="#ffffff"
+            app:civ_border_width="2dp"
+            android:layout_centerVertical="true"/>
+        <com.zerter.teamconnect.Controlers.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contactItemListName"
+            android:textSize="22sp"
+            android:textColor="@color/textColor"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            app:customFont="fonts/Roboto-Bold.ttf"
+            android:layout_toEndOf="@id/contactImage"/>
+        <com.zerter.teamconnect.Controlers.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contactItemListNumber"
+            android:textSize="18sp"
+            android:textColor="@color/textColor"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            app:customFont="fonts/Roboto-Light.ttf"
+            android:layout_toEndOf="@id/contactImage"
+            android:layout_below="@+id/contactItemListName"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textColor"/>
+</LinearLayout>

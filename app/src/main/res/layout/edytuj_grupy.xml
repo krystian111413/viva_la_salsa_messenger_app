@@ -12,25 +12,7 @@
         android:layout_above="@+id/button_Zapisz"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/buttonEdytujGrupe"
-        android:background="#b5b4b4b4"
         android:padding="15dp" />
-
-    <Button
-        android:id="@+id/button_Zapisz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:text="Zapisz"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/button_anuluj_edycje"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/ListViewGrupy"
-        android:text="Anuluj"
-        android:visibility="gone" />
+    
 
 </RelativeLayout>
