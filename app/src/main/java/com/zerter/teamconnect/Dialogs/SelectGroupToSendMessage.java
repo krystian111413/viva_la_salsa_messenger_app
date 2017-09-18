@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,37 +103,38 @@ public class SelectGroupToSendMessage extends DialogFragment {
     }
 
     void setAdapter() {
-        ListAdapterGroups adapter = new ListAdapterGroups(getActivity(), data.getGroups());
-        listView.setAdapter(adapter);
+        if(data.getGroups() != null){
+            ListAdapterGroups adapter = new ListAdapterGroups(getActivity(), data.getGroups());
+            listView.setAdapter(adapter);
+        }else {
+            Toast.makeText(getActivity(), R.string.No_groups_error,Toast.LENGTH_LONG).show();
+            dismiss();
+        }
     }
 
-    class ListAdapterGroups extends ArrayAdapter<Group> {
+    private class ListAdapterGroups extends ArrayAdapter<Group> {
 
-        private List<Group> groupList = new ArrayList<>();
         Data data;
         Context context;
 
         public ListAdapterGroups(@NonNull Context context, List<Group> groupList) {
             super(context, 0, groupList);
-            this.groupList = groupList;
             this.data = new Data(context);
             this.context = context;
         }
 
-        private List<View> viewList = new ArrayList<>();
+        List<View> viewList = new ArrayList<>();
 
         @NonNull
         @Override
         public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             final Group grupa = getItem(position);
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            convertView = inflater.inflate(R.layout.grupa_kontaktow_to_select,null);
 
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.grupa_kontaktow_to_select, parent, false);
-            }
             if (viewList.size() > position && viewList.get(position) != null) {
                 return viewList.get(position);
             }
-
             final MyTextView name = (MyTextView) convertView.findViewById(R.id.myTextViewContacts);
             if (grupa != null) {
                 name.setText(grupa.getName());

@@ -29,6 +29,8 @@ public class MenageGroupContacts extends Fragment {
     public static Button buttonStworzGrupe;
     public static Boolean EDIT_MODE = false;
 
+    public static Boolean groupView = true;
+
     public static class UpdateGroupPackage{
         public static Group original = new Group();
         public static Group newGroup = new Group();
@@ -55,15 +57,6 @@ public class MenageGroupContacts extends Fragment {
             @Override
             public void onClick(View v) {
                 if (EDIT_MODE){
-                    for (Person p :
-                            UpdateGroupPackage.original.getPersons()) {
-                        Log.d(TAG,"Original contact: " + p.getName());
-                    }
-                    for (Person p :
-                            UpdateGroupPackage.newGroup.getPersons()) {
-                        Log.d(TAG,"New contact: " + p.getName());
-                    }
-
                     data.updateGroup(UpdateGroupPackage.original,UpdateGroupPackage.newGroup);
                     buttonStworzGrupe.setText(R.string.add_team);
                     setAdapter(1);
@@ -96,13 +89,18 @@ public class MenageGroupContacts extends Fragment {
                 if (getGroups()!=null) {
                     listView.setAdapter(adapterGroups);
                 }
+                groupView = true;
                 break;
             case 2:
                 ListAdapterContacts adapter = new ListAdapterContacts(getActivity(), getContacts());
                 listView.setAdapter(adapter);
+                groupView = false;
                 break;
             default:
-                listView.setAdapter(adapterGroups);
+                if (getGroups()!=null) {
+                    listView.setAdapter(adapterGroups);
+                }
+                groupView = true;
         }
 
     }

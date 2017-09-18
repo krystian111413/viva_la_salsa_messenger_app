@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MyTextView;
@@ -52,13 +53,17 @@ public class Message extends Fragment {
         wyslij.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager manager = getFragmentManager();
-                SelectGroupToSendMessage sendMessaegeDialog = new SelectGroupToSendMessage();
-                Bundle bundle = new Bundle();
-                bundle.putString("message", editTextTrescWiadomosci.getText().toString());
-                sendMessaegeDialog.setArguments(bundle);
-                sendMessaegeDialog.show(manager, "SelectGroupToSendMessage");
-                editTextTrescWiadomosci.setText("");
+                if (editTextTrescWiadomosci.getText().toString().isEmpty()){
+                    Toast.makeText(getActivity(), R.string.message_empty_error,Toast.LENGTH_SHORT).show();
+                }else {
+                    FragmentManager manager = getFragmentManager();
+                    SelectGroupToSendMessage sendMessaegeDialog = new SelectGroupToSendMessage();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("message", editTextTrescWiadomosci.getText().toString());
+                    sendMessaegeDialog.setArguments(bundle);
+                    sendMessaegeDialog.show(manager, "SelectGroupToSendMessage");
+                    editTextTrescWiadomosci.setText("");
+                }
             }
         });
     }

@@ -38,4 +38,6 @@
     <string name="select_a_group">Select a group</string>
     <string name="Message_was_sent">Message was sent</string>
     <string name="select_template">Select template</string>
+    <string name="No_groups_error">Before sending a message, create a group</string>
+    <string name="message_empty_error">You did not write the message</string>
 </resources>

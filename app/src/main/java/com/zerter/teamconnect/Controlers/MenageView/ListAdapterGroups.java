@@ -73,6 +73,7 @@ public class ListAdapterGroups extends ArrayAdapter<Group> {
                 ListAdapterContacts listAdapterContacts = new ListAdapterContacts((Activity) context,data.getContacts(),grupa);
                 if (MenageGroupContacts.listView != null){
                     MenageGroupContacts.listView.setAdapter(listAdapterContacts);
+                    MenageGroupContacts.groupView = false;
                 }
             }
         });

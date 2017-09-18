@@ -21,4 +21,6 @@
     <string name="select_a_group">Wybierz grupe</string>
     <string name="Message_was_sent">Wiadomość została wysłana</string>
     <string name="select_template">Wybierz szablon</string>
+    <string name="No_groups_error">Przed wysłaniem wiadomości stwórz grupę</string>
+    <string name="message_empty_error">Nie napisałeś wiadomości</string>
 </resources>
