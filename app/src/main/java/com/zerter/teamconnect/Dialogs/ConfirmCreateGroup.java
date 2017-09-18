@@ -17,9 +17,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zerter.teamconnect.Controlers.Cache;
 import com.zerter.teamconnect.Controlers.Data;
+import com.zerter.teamconnect.Controlers.MenageView.ListAdapterGroups;
 import com.zerter.teamconnect.Controlers.MyTextView;
+import com.zerter.teamconnect.Models.Group;
+import com.zerter.teamconnect.Models.Person;
 import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
 import com.zerter.teamconnect.Models.Contacts;
 import com.zerter.teamconnect.R;
@@ -37,6 +41,9 @@ public class ConfirmCreateGroup extends DialogFragment {
     EditText nazwaGrupy;
     Data data;
 
+    List<Person> selectedContacts = new ArrayList<>();
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -52,16 +59,22 @@ public class ConfirmCreateGroup extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            java.lang.reflect.Type type = new TypeToken<List<Person>>(){}.getType();
+            String list = bundle.getString("selected_contacts");
+            selectedContacts = new Gson().fromJson(list,type);
+        }
         buttonZapisz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (nazwaGrupy.getText().toString().isEmpty()) {
                     Toast.makeText(getActivity(), "Wprowadź nazwę grupy", Toast.LENGTH_LONG).show();
                 } else {
-                    Contacts contacts = new Contacts();
-                    contacts.setPersons(Cache.ZAZNACZONE_KONTAKTY);
-                    contacts.setName(nazwaGrupy.getText().toString());
-                    stworzGrupeKontaktow(contacts);
+                    Group group = new Group();
+                    group.setPersons(selectedContacts);
+                    group.setName(nazwaGrupy.getText().toString());
+                    stworzGrupeKontaktow(group);
                     setAdapter();
                     dismiss();
                 }
@@ -76,45 +89,18 @@ public class ConfirmCreateGroup extends DialogFragment {
         });
     }
 
-    private void stworzGrupeKontaktow(Contacts newContactsGroup) {
-        List<Contacts> contactsList = new ArrayList<>();
-        if (data.wczytajGrupyKontaktow() != null)
-            contactsList = data.wczytajGrupyKontaktow();
-        contactsList.add(newContactsGroup);
-        data.zapiszGrupyKontaktow(new Gson().toJson(contactsList));
+    private void stworzGrupeKontaktow(Group newContactsGroup) {
+        List<Group> groupList = new ArrayList<>();
+        if (data.getGroups() != null)
+            groupList = data.getGroups();
+        groupList.add(newContactsGroup);
+        data.setGroups(new Gson().toJson(groupList));
     }
     public void setAdapter() {
 //        Arrays.sort(Cache.LISTA_KONTAKTOW.get());
-        if (data.wczytajGrupyKontaktow() != null) {
-            ListAdapterContacts adapter = new ListAdapterContacts(getActivity(), data.wczytajGrupyKontaktow());
+        if (data.getGroups() != null) {
+            ListAdapterGroups adapter = new ListAdapterGroups(getActivity(), data.getGroups());
             MenageGroupContacts.listView.setAdapter(adapter);
-        }
-    }
-    class ListAdapterContacts extends ArrayAdapter<Contacts> {
-
-        private Typeface typeFace;
-        public ListAdapterContacts(@NonNull Context context, List<Contacts> kontakty) {
-            super(context, 0, kontakty);
-            Cache.ZAZNACZONE_GRUPY = new ArrayList<>();
-            this.typeFace=Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Light.ttf");
-        }
-
-        @NonNull
-        @Override
-        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            final Contacts grupa = getItem(position);
-
-            if (convertView == null){
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.grupa_kontaktow,parent,false);
-            }
-            final MyTextView myTextView = (MyTextView) convertView.findViewById(R.id.myTextViewContacts);
-            if (grupa != null) {
-                myTextView.setText(grupa.getName());
-            }else {
-                myTextView.setText("n/a");
-            }
-
-            return convertView;
         }
     }
 }
