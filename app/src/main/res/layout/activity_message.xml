@@ -11,12 +11,23 @@
     tools:layout_editor_absoluteY="8dp">
 
 
+    <com.zerter.teamconnect.Controlers.MyTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_template"
+        app:customFont="fonts/Oswald-Stencil.ttf"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:textColor="@color/textColor"
+        android:id="@+id/messageTextViewSelectTemplate"/>
+
     <ListView
         android:id="@+id/ListViewListaGrupKontaktow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/messageLineSeparate"
-        android:layout_marginBottom="5dp" />
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/messageTextViewSelectTemplate"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -35,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
+            android:textColor="@color/textColor"
             android:gravity="top|start"
             android:hint="@string/hint_pola_wiadomosci"
             android:padding="5dp"

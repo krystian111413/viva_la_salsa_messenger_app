@@ -1,28 +1,22 @@
 package com.zerter.teamconnect.Views.Fragments;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
-import com.zerter.teamconnect.Controlers.Cache;
 import com.zerter.teamconnect.Controlers.Data;
-import com.zerter.teamconnect.Controlers.MyTextView;
+import com.zerter.teamconnect.Controlers.MenageView.ListAdapterContacts;
+import com.zerter.teamconnect.Controlers.MenageView.ListAdapterGroups;
 import com.zerter.teamconnect.Dialogs.ConfirmCreateGroup;
-import com.zerter.teamconnect.Models.Contacts;
+import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.Models.Person;
 import com.zerter.teamconnect.R;
 
@@ -30,12 +24,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenageGroupContacts extends Fragment {
-
-
+    private String TAG = getClass().getName();
     public static ListView listView;
-    Button buttonStworzGrupe, buttonUsunGrupe;
-    Data data;
+    public static Button buttonStworzGrupe;
+    public static Boolean EDIT_MODE = false;
 
+    public static class UpdateGroupPackage{
+        public static Group original = new Group();
+        public static Group newGroup = new Group();
+    }
+
+
+    Data data;
+    public static List<Person> selectedContacts = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -49,121 +50,68 @@ public class MenageGroupContacts extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         data = new Data(getActivity());
-        setAdapter();
+        setAdapter(1);
         buttonStworzGrupe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (buttonStworzGrupe.getText().equals("OK")) {
-                    buttonStworzGrupe.setText(R.string.add_team);
-                    FragmentManager manager = getFragmentManager();
-                    ConfirmCreateGroup confirmCreateGroup = new ConfirmCreateGroup();
-                    confirmCreateGroup.show(manager, "ConfirmCreateGroup");
-//                    setAdapter();
-                } else {
-                    buttonStworzGrupe.setText(R.string.OK);
-                    ListAdapterPerson adapter = new ListAdapterPerson(getActivity(), Cache.LISTA_KONTAKTOW);
-                    listView.setAdapter(adapter);
+                if (EDIT_MODE){
+                    for (Person p :
+                            UpdateGroupPackage.original.getPersons()) {
+                        Log.d(TAG,"Original contact: " + p.getName());
+                    }
+                    for (Person p :
+                            UpdateGroupPackage.newGroup.getPersons()) {
+                        Log.d(TAG,"New contact: " + p.getName());
+                    }
 
+                    data.updateGroup(UpdateGroupPackage.original,UpdateGroupPackage.newGroup);
+                    buttonStworzGrupe.setText(R.string.add_team);
+                    setAdapter(1);
+                    EDIT_MODE = false;
+                }else {
+                    if (buttonStworzGrupe.getText().equals("OK")) {
+                        buttonStworzGrupe.setText(R.string.add_team);
+                        FragmentManager manager = getFragmentManager();
+                        ConfirmCreateGroup confirmCreateGroup = new ConfirmCreateGroup();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("selected_contacts", new Gson().toJson(selectedContacts));
+                        confirmCreateGroup.setArguments(bundle);
+                        confirmCreateGroup.show(manager, "ConfirmCreateGroup");
+//                    setAdapter();
+                    } else {
+                        buttonStworzGrupe.setText(R.string.OK);
+                        setAdapter(2);
+
+                    }
                 }
             }
         });
-//        buttonUsunGrupe.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                List<Contacts> contactsList = new ArrayList<>();
-//                if (data.wczytajGrupyKontaktow() != null)
-//                    contactsList = data.wczytajGrupyKontaktow();
-//                for (int i = 0; i < Cache.ZAZNACZONE_GRUPY.size(); i++) {
-//                    String nazwaZaznaczonejGrupy = Cache.ZAZNACZONE_GRUPY.get(i).getName();
-//                    for (int j = 0; j < contactsList.size(); j++) {
-//                        if (contactsList.get(j).getName().equals(nazwaZaznaczonejGrupy)) {
-//                            //usun z glownej listy
-//                            contactsList.remove(j);
-//                        }
-//                    }
-//                }
-//
-//
-////                contactsList.remove(Cache.ZAZNACZONE_GRUPY);
-//                data.zapiszGrupyKontaktow(new Gson().toJson(contactsList));
-//                setAdapter();
-//            }
-//        });
+
     }
 
-    public void setAdapter() {
-//        Arrays.sort(Cache.LISTA_KONTAKTOW.get());
-        if (data.wczytajGrupyKontaktow() != null) {
-            ListAdapterContacts adapter = new ListAdapterContacts(getActivity(), data.wczytajGrupyKontaktow());
-            listView.setAdapter(adapter);
+    public void setAdapter(int typeList) {
+        ListAdapterGroups adapterGroups = new ListAdapterGroups(getActivity(), getGroups());
+        switch (typeList){
+            case 1:
+                if (getGroups()!=null) {
+                    listView.setAdapter(adapterGroups);
+                }
+                break;
+            case 2:
+                ListAdapterContacts adapter = new ListAdapterContacts(getActivity(), getContacts());
+                listView.setAdapter(adapter);
+                break;
+            default:
+                listView.setAdapter(adapterGroups);
         }
+
     }
 
-    class ListAdapterPerson extends ArrayAdapter<Person> {
-
-        String TAG = getClass().getName();
-        List<Person> zaznaczoneKontakty = new ArrayList<>();
-        private final Activity context;
-
-        ListAdapterPerson(@NonNull Activity context, List<Person> kontakty) {
-            super(context, R.layout.grupa_kontaktow, kontakty);
-            this.context = context;
-            Cache.ZAZNACZONE_KONTAKTY = new ArrayList<>();
-        }
-
-        ListAdapterPerson(@NonNull Activity context, List<Person> kontakty, List<Person> zaznaczoneKontakty) {
-            super(context, R.layout.grupa_kontaktow, kontakty);
-            Log.d(TAG, new Gson().toJson(zaznaczoneKontakty));
-            this.zaznaczoneKontakty = zaznaczoneKontakty;
-            this.context = context;
-            Cache.ZAZNACZONE_KONTAKTY = new ArrayList<>();
-        }
-
-        @NonNull
-        @Override
-        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            final Person kontakt = getItem(position);
-
-            LayoutInflater inflater = context.getLayoutInflater();
-            convertView = inflater.inflate(R.layout.grupa_kontaktow, null, false);
-
-            final MyTextView myTextView = (MyTextView) convertView.findViewById(R.id.myTextViewContacts);
-            if (kontakt != null) {
-                myTextView.setText(kontakt.getName() + "\n" + kontakt.getNumber());
-            } else {
-                myTextView.setText("n/a");
-            }
-
-
-            return convertView;
-        }
+    private  List<Group> getGroups(){
+        return data.getGroups();
     }
 
-    private class ListAdapterContacts extends ArrayAdapter<Contacts> {
-
-
-        public ListAdapterContacts(@NonNull Context context, List<Contacts> kontakty) {
-            super(context, 0, kontakty);
-            Cache.ZAZNACZONE_GRUPY = new ArrayList<>();
-        }
-
-        @NonNull
-        @Override
-        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            final Contacts grupa = getItem(position);
-
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.grupa_kontaktow, parent, false);
-            }
-            final MyTextView myTextView = (MyTextView) convertView.findViewById(R.id.myTextViewContacts);
-            if (grupa != null) {
-                myTextView.setText(grupa.getName());
-            } else {
-                myTextView.setText("n/a");
-            }
-
-            return convertView;
-        }
+    private List<Person> getContacts(){
+        return data.getContacts();
     }
-
 }
