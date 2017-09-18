@@ -23,4 +23,7 @@
     <string name="select_template">Wybierz szablon</string>
     <string name="No_groups_error">Przed wysłaniem wiadomości stwórz grupę</string>
     <string name="message_empty_error">Nie napisałeś wiadomości</string>
+    <string name="are_you_sure">Czy jestes pewien?</string>
+    <string name="enter_the_name_of_the_group">Wprowadź nazwę grupy</string>
+    <string name="save">Zapisz</string>
 </resources>

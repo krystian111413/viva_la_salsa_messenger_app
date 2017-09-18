@@ -40,4 +40,8 @@
     <string name="select_template">Select template</string>
     <string name="No_groups_error">Before sending a message, create a group</string>
     <string name="message_empty_error">You did not write the message</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="enter_the_name_of_the_group">Enter the name of the group</string>
+    <string name="save">Save</string>
+    <string name="anuluj" translatable="false">Anuluj</string>
 </resources>
