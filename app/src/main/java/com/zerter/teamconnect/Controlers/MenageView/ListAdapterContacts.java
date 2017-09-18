@@ -110,15 +110,18 @@ public class ListAdapterContacts extends ArrayAdapter<Person> {
             }
         });
 
-        for (Person person: zaznaczoneKontakty) {
-            if (kontakt != null) {
-                if (Objects.equals(person.getNumber(), kontakt.getNumber())
-                        && person.getName().equals(kontakt.getName())){
-                    name.setTextColor(getContext().getResources().getColor(R.color.textSelected));
-                    MenageGroupContacts.selectedContacts.add(getItem(position));
+        if (zaznaczoneKontakty != null){
+            for (Person person: zaznaczoneKontakty) {
+                if (kontakt != null) {
+                    if (Objects.equals(person.getNumber(), kontakt.getNumber())
+                            && person.getName().equals(kontakt.getName())){
+                        name.setTextColor(getContext().getResources().getColor(R.color.textSelected));
+                        MenageGroupContacts.selectedContacts.add(person);
+                    }
                 }
             }
         }
+
 
         viewList.add(convertView);
         return convertView;

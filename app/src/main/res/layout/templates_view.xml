@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
-    android:padding="10dp">
+    android:padding="10dp"
+    tools:context=".Views.Fragments.Message"
+    tools:layout_editor_absoluteX="8dp"
+    tools:layout_editor_absoluteY="8dp">
+
 
     <com.zerter.teamconnect.Controlers.MyButton
-        android:id="@+id/buttonEdytujGrupe"
+        android:id="@+id/buttonAddTemplate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="?android:selectableItemBackground"
         android:padding="5dp"
-        android:text="@string/add_team"
+        android:text="@string/add_template"
         android:textColor="@android:color/background_light"
         app:customFont="fonts/Oswald-Stencil.ttf"/>
 
 
     <ListView
-        android:id="@+id/ListViewGrupy"
+        android:id="@+id/ListViewTemplate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/buttonEdytujGrupe"
+        android:layout_below="@+id/buttonAddTemplate"
         android:layout_marginTop="10dp"
         android:padding="5dp" />
 
+
 </RelativeLayout>
+

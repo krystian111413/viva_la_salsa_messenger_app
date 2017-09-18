@@ -35,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
+            android:textColor="@color/textColor"
             android:gravity="top|start"
             android:hint="@string/hint_pola_wiadomosci"
             android:padding="5dp"

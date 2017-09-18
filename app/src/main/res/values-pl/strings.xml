@@ -16,4 +16,8 @@
     <string name="add_contact">Dodaj kontakt</string>
     <string name="Update">Aktualizuj</string>
     <string name="group_alredy_exist">Grupa o takiej nazwie już istnieje.</string>
+    <string name="add_template">Dodaj szablon</string>
+    <string name="write_your_template">Napisz swój szablon...</string>
+    <string name="select_a_group">Wybierz grupe</string>
+    <string name="Message_was_sent">Wiadomość została wysłana</string>
 </resources>
