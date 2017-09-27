@@ -36,7 +36,18 @@ public class Data {
         editor.clear();
         editor.apply();
     }
-
+    public void setMessagesPlaned(String value){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("messagesPlaned", value);
+        editor.apply();
+    }
+    public List<Message> getMessagesPlaned(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String s = sharedPreferences.getString("messagesPlaned", "");
+        java.lang.reflect.Type type = new TypeToken<List<Message>>(){}.getType();
+        return new Gson().fromJson(s,type);
+    }
     public void setMessages(String value){
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
