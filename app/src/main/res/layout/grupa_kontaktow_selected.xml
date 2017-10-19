@@ -27,28 +27,10 @@
         android:paddingLeft="15dp"
         android:text="@string/Empty"
         android:textAllCaps="false"
-        android:textColor="@android:color/background_light"
+        android:textColor="@color/textColor"
         android:textSize="24sp"
         android:textStyle="bold|italic"
         app:customFont="fonts/Oswald-Light.ttf" />
 
-    <ImageButton
-        android:id="@+id/imageButtonDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/imageButtonEdit"
-        android:background="?android:selectableItemBackground"
-        app:srcCompat="@android:drawable/ic_menu_delete"
-        android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/myTextViewContacts" />
-    <ImageButton
-        android:id="@+id/imageButtonEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_manage"
-        android:background="?android:selectableItemBackground"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/imageButtonDelete" />
 
 </RelativeLayout>

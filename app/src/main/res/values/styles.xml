@@ -19,4 +19,5 @@
     <declare-styleable name="MyEditText">
         <attr name="customFont" format="string"/>
     </declare-styleable>
+
 </resources>

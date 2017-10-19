@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.zerter.teamconnect.AddContact.AddContactFragment;
 import com.zerter.teamconnect.Controlers.CustomTypefaceSpan;
 import com.zerter.teamconnect.Controlers.PermisionControler.OnResultListener;
 import com.zerter.teamconnect.HistoryMessageFragment;
@@ -33,6 +34,9 @@ import com.zerter.teamconnect.R;
 import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
 import com.zerter.teamconnect.Views.Fragments.MenageTemplates;
 import com.zerter.teamconnect.Views.Fragments.Message;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GeneralActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -159,6 +163,12 @@ public class GeneralActivity extends AppCompatActivity
             MenageTemplates menageTemplates = new MenageTemplates();
             setContener(menageTemplates);
 
+        }else if (id == R.id.nav_add_contact) {
+//            MenageTemplates menageTemplates = new MenageTemplates();
+//            setContener(menageTemplates);
+
+            AddContactFragment addContact = new AddContactFragment();
+            setContener(addContact);
         }
 
 
@@ -326,6 +336,4 @@ public class GeneralActivity extends AppCompatActivity
             }
         }
     }
-
-
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:paddingLeft="20dp">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/contactImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/hiphop"
+        app:civ_border_color="#ffffff"
+        app:civ_border_width="2dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textColor"/>
+
+    <com.zerter.teamconnect.Controlers.MyButton
+        android:id="@+id/addContactButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?actionBarItemBackground"
+        android:gravity="center"
+        android:text="@string/add_contact"
+        android:textColor="@color/textColor"
+        android:textSize="24sp"
+        app:customFont="@string/Oswald_Bold" />
+
+    <com.zerter.teamconnect.Controlers.MyEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/name"
+        android:textSize="16sp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:id="@+id/contactName"/>
+
+    <com.zerter.teamconnect.Controlers.MyEditText
+        android:id="@+id/contactSurname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/surname"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="16sp"/>
+
+    <com.zerter.teamconnect.Controlers.MyEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/number"
+        android:textSize="16sp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:inputType="number"
+        android:id="@+id/contactNumber"/>
+    <com.zerter.teamconnect.Controlers.MyEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email"
+        android:textSize="16sp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:inputType="textEmailAddress"
+        android:id="@+id/contactEmail"/>
+    <com.zerter.teamconnect.Controlers.MyButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_existing_groups"
+        android:background="?actionBarItemBackground"
+        android:textColor="@color/textColor"
+        app:customFont="@string/Oswald_Bold"
+        android:id="@+id/contactAddGroup"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewGroupsToAddToContact"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textColor"/>
+
+
+</LinearLayout>
