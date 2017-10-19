@@ -1,5 +1,7 @@
 package com.zerter.teamconnect.Models;
 
+import java.util.Date;
+
 /**
  * Model Message
  */
@@ -8,6 +10,15 @@ public class Message {
     private String message;
     private String date;
     private Group group = new Group();
+    private Date messagePlan = new Date();
+
+    public Date getMessagePlan() {
+        return messagePlan;
+    }
+
+    public void setMessagePlan(Date messagePlan) {
+        this.messagePlan = messagePlan;
+    }
 
     public String getMessage() {
         return message;
