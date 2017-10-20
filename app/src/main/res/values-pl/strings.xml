@@ -21,4 +21,17 @@
     <string name="select_a_group">Wybierz grupe</string>
     <string name="Message_was_sent">Wiadomość została wysłana</string>
     <string name="select_template">Wybierz szablon</string>
+    <string name="No_groups_error">Przed wysłaniem wiadomości stwórz grupę</string>
+    <string name="message_empty_error">Nie napisałeś wiadomości</string>
+    <string name="are_you_sure">Czy jestes pewien?</string>
+    <string name="enter_the_name_of_the_group">Wprowadź nazwę grupy</string>
+    <string name="save">Zapisz</string>
+    <string name="name">nazwa</string>
+    <string name="surname">nazwisko</string>
+    <string name="number">numer</string>
+    <string name="email">email</string>
+    <string name="name_of_group">Nazwa grupy</string>
+    <string name="add_to_existing_groups">Dodaj do istniejącej grupy</string>
+    <string name="Contact_added">Kontakt został dodany pomyślnie</string>
+    <string name="add">Dodaj</string>
 </resources>

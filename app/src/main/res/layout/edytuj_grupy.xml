@@ -9,7 +9,6 @@
         android:id="@+id/ListViewGrupy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/button_Zapisz"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/buttonEdytujGrupe"
         android:padding="15dp" />

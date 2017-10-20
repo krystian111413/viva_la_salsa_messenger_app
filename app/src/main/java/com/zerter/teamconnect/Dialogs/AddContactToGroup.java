@@ -3,9 +3,9 @@ package com.zerter.teamconnect.Dialogs;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,103 +13,55 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.google.gson.Gson;
+import com.zerter.teamconnect.AddContact.AddContact;
 import com.zerter.teamconnect.Controlers.Data;
-import com.zerter.teamconnect.Controlers.MyButton;
 import com.zerter.teamconnect.Controlers.MyTextView;
 import com.zerter.teamconnect.Models.Group;
-import com.zerter.teamconnect.Models.Message;
-import com.zerter.teamconnect.Models.Person;
 import com.zerter.teamconnect.R;
-import com.zerter.teamconnect.Views.Activities.GeneralActivity;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Okno dialogowe przy potwierdzeniu stworzenia nowej grupy
+ * DialogFragment do wyswietlenia listy grup i możliwosć dodania do nich kontaktu
  */
 
-public class SelectGroupToSendMessage extends DialogFragment {
+public class AddContactToGroup extends DialogFragment {
 
-    Button sendButton;
-    ListView listView;
     List<Group> groups = new ArrayList<>();
-    Data data;
+    Button add;
+    ListView listViewGroups;
 
-    private String TAG = getClass().getName();
-    String message;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.select_group_to_send_message, null);
+        View view = inflater.inflate(R.layout.select_group_to_add_to_contact,container,false);
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        data = new Data(getActivity());
-        sendButton = (MyButton) view.findViewById(R.id.buttonWyślij);
-        listView = (ListView) view.findViewById(R.id.listViewGroupToSend);
+        add = (Button) view.findViewById(R.id.buttonAddContactToGroups);
+        listViewGroups = (ListView) view.findViewById(R.id.listViewGroupToAdd);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            message = bundle.getString("message");
-        }else {
-            Toast.makeText(getActivity(),"No messsage", Toast.LENGTH_SHORT).show();
-            dismiss();
-        }
-        setAdapter();
-
-        sendButton.setOnClickListener(new View.OnClickListener() {
+        Data data = new Data(getActivity());
+        setAdapter(data.getGroups());
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (Group group :
-                        groups) {
-                    for (Person person :
-                            group.getPersons()) {
-
-                        GeneralActivity.sendSMS(person.getNumber().replace(" ",""), message);
-                    }
-
-                    List<com.zerter.teamconnect.Models.Message> messageList = new ArrayList<com.zerter.teamconnect.Models.Message>();
-                    if (data.getMessages() != null){
-                        messageList = data.getMessages();
-                    }
-                    Message msg = new Message();
-                    msg.setMessage(message);
-                    Calendar calander = Calendar.getInstance();
-                    Integer cDay = calander.get(Calendar.DAY_OF_MONTH);
-                    Integer cMonth = calander.get(Calendar.MONTH) + 1;
-                    Integer cYear = calander.get(Calendar.YEAR);
-                    Integer cHour = new Date().getHours();
-                    Integer cMinute = calander.get(Calendar.MINUTE);
-                    String date = cHour + ":" + cMinute + " " + cDay + "-" + cMonth + "-" + cYear;
-                    msg.setDate(String.valueOf(date));
-                    msg.setGroup(group);
-                    messageList.add(msg);
-                    data.setMessages(new Gson().toJson(messageList));
-                }
-                Toast.makeText(getActivity(),R.string.Message_was_sent,Toast.LENGTH_LONG).show();
+//                AddContact addContact
                 dismiss();
-
             }
         });
     }
 
-    void setAdapter() {
-        if(data.getGroups() != null){
-            ListAdapterGroups adapter = new ListAdapterGroups(getActivity(), data.getGroups());
-            listView.setAdapter(adapter);
-        }else {
-            Toast.makeText(getActivity(), R.string.No_groups_error,Toast.LENGTH_LONG).show();
-            dismiss();
-        }
+    void setAdapter(List<Group> groups){
+        ListAdapterGroups adapter = new ListAdapterGroups(getActivity(),groups);
+        listViewGroups.setAdapter(adapter);
     }
 
     private class ListAdapterGroups extends ArrayAdapter<Group> {

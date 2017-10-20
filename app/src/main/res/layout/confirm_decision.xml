@@ -1,41 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="@color/colorPrimary">
 
-    <TextView
-        android:id="@+id/textView"
+    <com.zerter.teamconnect.Controlers.MyTextView
+        android:id="@+id/textViewConfirmTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Czy jesteś pewien?"
-        android:textAlignment="center" />
+        android:text="@string/are_you_sure"
+        android:textAlignment="center"
+        app:customFont="fonts/Oswald-Stencil.ttf"
+        android:textColor="@color/textColor"
+        android:layout_marginBottom="10dp"/>
 
-    <EditText
+    <com.zerter.teamconnect.Controlers.MyEditText
         android:id="@+id/editTextNazwaGrupy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="Wprowadź nazwę grupy"
+        android:hint="@string/enter_the_name_of_the_group"
         android:inputType="textPersonName"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:customFont="fonts/Oswald-Light.ttf"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"/>
 
-    <Button
-        android:id="@+id/buttonZapisz"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/editTextNazwaGrupy"
-        android:text="Zapisz" />
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <com.zerter.teamconnect.Controlers.MyButton
+            android:id="@+id/buttonZapisz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/save"
+            android:textColor="@color/textColor"
+            app:customFont="fonts/Oswald-Stencil.ttf"
+            android:background="?android:selectableItemBackground"/>
 
-    <Button
-        android:id="@+id/buttonAnuluj"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/editTextNazwaGrupy"
-        android:text="Anuluj" />
-</RelativeLayout>
+        <com.zerter.teamconnect.Controlers.MyButton
+            android:id="@+id/buttonAnuluj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/anuluj"
+            app:customFont="fonts/Oswald-Stencil.ttf"
+            android:textColor="@color/textColor"
+
+            android:background="?android:selectableItemBackground"/>
+    </RelativeLayout>
+
+</LinearLayout>
