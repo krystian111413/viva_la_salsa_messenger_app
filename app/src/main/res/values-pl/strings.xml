@@ -34,4 +34,12 @@
     <string name="add_to_existing_groups">Dodaj do istniejącej grupy</string>
     <string name="Contact_added">Kontakt został dodany pomyślnie</string>
     <string name="add">Dodaj</string>
+    <string name="add_plan">Dodaj plan</string>
+    <string name="repeat_every_week">Powtarzaj co tydzień</string>
+    <string name="repeat_every_month">Powtarzaj co miesiąc</string>
+    <string name="repeat_every_year">Powtarzaj co rok</string>
+    <string name="please_set_name_of_plan">Proszę uzupełnij pole z nazwą planu.</string>
+    <string name="please_set_text_of_message">Proszę uzupenij pole treści wiadomości</string>
+    <string name="repeat_every_day">Powtarzaj co dzien</string>
+    <string name="please_select_group">Proszę wybrać grupę</string>
 </resources>

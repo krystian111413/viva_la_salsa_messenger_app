@@ -96,7 +96,7 @@ class AddContactFragment: Fragment(){
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
             Log.d("getView", "dziala")
-            var view = convertView
+            val view: View?
             val grupa = getItem(position)
             val inflater = activity.layoutInflater
             view = inflater.inflate(R.layout.grupa_kontaktow_selected, null)

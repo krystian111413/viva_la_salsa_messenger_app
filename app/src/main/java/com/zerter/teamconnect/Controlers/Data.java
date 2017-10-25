@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.zerter.teamconnect.AddPlan.Plan;
 import com.zerter.teamconnect.Models.Contacts;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.Models.Message;
@@ -36,16 +37,18 @@ public class Data {
         editor.clear();
         editor.apply();
     }
+
+
     public void setMessagesPlaned(String value){
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("messagesPlaned", value);
         editor.apply();
     }
-    public List<Message> getMessagesPlaned(){
+    public List<Plan> getMessagesPlaned(){
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String s = sharedPreferences.getString("messagesPlaned", "");
-        java.lang.reflect.Type type = new TypeToken<List<Message>>(){}.getType();
+        java.lang.reflect.Type type = new TypeToken<List<Plan>>(){}.getType();
         return new Gson().fromJson(s,type);
     }
     public void setMessages(String value){

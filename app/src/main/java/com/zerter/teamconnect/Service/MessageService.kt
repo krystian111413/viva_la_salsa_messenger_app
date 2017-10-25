@@ -42,11 +42,11 @@ class MessageService: Service() {
         val sms = SmsManager.getDefault()
         sms.sendTextMessage(phoneNumber, null, message, null, null)
     }
-
-    fun getMessagesDates(): MutableList<Message>? {
-        val data = Data(applicationContext)
-        return data.messagesPlaned
-    }
+//
+//    fun getMessagesDates(): MutableList<Message>? {
+//        val data = Data(applicationContext)
+//        return data.messagesPlaned
+//    }
 
     internal inner class TimeDisplayTimerTask : TimerTask() {
 
