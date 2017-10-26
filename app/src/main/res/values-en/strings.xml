@@ -34,4 +34,12 @@
     <string name="add_to_existing_groups">Add to existing groups</string>
     <string name="Contact_added">Contact was added successfully</string>
     <string name="add">Add</string>
+    <string name="add_plan">Add plan</string>
+    <string name="repeat_every_week">Repeat every week</string>
+    <string name="repeat_every_month">Repeat every month</string>
+    <string name="repeat_every_year">Repeat every year</string>
+    <string name="please_set_name_of_plan">Please set name of new plan</string>
+    <string name="please_set_text_of_message">Please set text of message</string>
+    <string name="repeat_every_day">Repeat every day</string>
+    <string name="please_select_group">Please select groups</string>
 </resources>
