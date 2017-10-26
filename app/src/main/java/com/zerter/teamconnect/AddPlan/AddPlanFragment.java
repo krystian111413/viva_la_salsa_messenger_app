@@ -12,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.R;
 
@@ -26,7 +28,6 @@ import java.util.List;
  */
 
 public class AddPlanFragment extends Fragment {
-
     private Button addButton;
     private ListView plans;
     private Data data;
@@ -50,14 +51,11 @@ public class AddPlanFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddPlanViewSet viewFragment = new AddPlanViewSet();
-                FragmentManager FM = getFragmentManager();
-                FragmentTransaction FT = FM.beginTransaction();
-                FT.addToBackStack("AddPlanViewSet");
-                FT.add(R.id.GeneralContener, viewFragment);
-                FT.commit();
+                goToAddPlanView();
             }
         });
+
+
         setAdapter();
     }
 
@@ -65,6 +63,26 @@ public class AddPlanFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setAdapter();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        setAdapter();
+    }
+
+    void goToAddPlanView(String... object){
+        Bundle bundle = new Bundle();
+        if (object.length > 0){
+            bundle.putString("plan",object[0]);
+        }
+        AddPlanViewSet viewFragment = new AddPlanViewSet();
+        viewFragment.setArguments(bundle);
+        FragmentManager FM = getFragmentManager();
+        FragmentTransaction FT = FM.beginTransaction();
+        FT.addToBackStack("AddPlanViewSet");
+        FT.add(R.id.GeneralContener, viewFragment);
+        FT.commit();
     }
 
     private void setAdapter() {
@@ -93,14 +111,38 @@ public class AddPlanFragment extends Fragment {
 
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.plan_item_list, parent, false);
             }
             assert convertView != null;
             TextView textView = (TextView) convertView.findViewById(R.id.planName);
             textView.setText(getItem(position).getName());
+            ImageButton edit = (ImageButton) convertView.findViewById(R.id.imageButtonEdit);
+            ImageButton delete = (ImageButton) convertView.findViewById(R.id.imageButtonDelete);
 
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String jsonObjectOfPlan = new Gson().toJson(getItem(position));
+                    goToAddPlanView(jsonObjectOfPlan);
+                }
+            });
+
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    List<Plan> plansTmp = new ArrayList<>();
+                    for (Plan plan:
+                         planList) {
+                        if (getItem(position).getName() != plan.getName()){
+                            plansTmp.add(plan);
+                        }
+                    }
+                    data.setMessagesPlaned(new Gson().toJson(plansTmp));
+                    setAdapter();
+                }
+            });
             return convertView;
         }
     }

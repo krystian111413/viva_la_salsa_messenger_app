@@ -13,10 +13,19 @@ public class Plan {
     private String date;
     private String text;
     private String name;
+    private Boolean day;
     private Boolean week;
     private Boolean month;
     private Boolean year;
     private List<Group> groups = new ArrayList<>();
+
+    public Boolean getDay() {
+        return day;
+    }
+
+    public void setDay(Boolean day) {
+        this.day = day;
+    }
 
     public String getName() {
         return name;

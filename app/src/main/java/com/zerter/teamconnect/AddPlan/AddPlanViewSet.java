@@ -53,6 +53,8 @@ public class AddPlanViewSet extends Fragment {
     ListView selectedGroups;
     List<Group> groupList = null;
 
+    Plan plan = null;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -69,6 +71,9 @@ public class AddPlanViewSet extends Fragment {
         year = (Switch) view.findViewById(R.id.switchOfYear);
         time = (TimePicker) view.findViewById(R.id.timePicker);
         selectedGroups = (ListView) view.findViewById(R.id.listViewSelectedGroups);
+
+        plan = new Gson().fromJson(getArguments().getString("plan"),Plan.class);
+
         return view;
     }
 
@@ -84,6 +89,18 @@ public class AddPlanViewSet extends Fragment {
                 addNewPlan();
             }
         });
+
+        if (plan != null){
+            add.setText(R.string.save);
+            name.setText(plan.getName());
+            textMessage.setText(plan.getText());
+            day.setChecked(plan.getDay());
+            week.setChecked(plan.getWeek());
+            month.setChecked(plan.getMonth());
+            year.setChecked(plan.getYear());
+            setAdapter();
+        }
+
 
         selectGroup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +181,9 @@ public class AddPlanViewSet extends Fragment {
         ListAdapterGroups adapter = null;
         if (groupList != null) {
             adapter = new ListAdapterGroups(getActivity(), groupList);
-        } else {
+        } else if (plan != null) {
+            adapter = new ListAdapterGroups(getActivity(), plan.getGroups());
+        }else {
             Toast.makeText(getActivity(), "No selected groups", Toast.LENGTH_SHORT).show();
         }
         selectedGroups.setAdapter(adapter);
@@ -243,6 +262,7 @@ public class AddPlanViewSet extends Fragment {
 
             plan.setDate(date);
             plan.setText(textMessage.getText().toString());
+            plan.setDay(day.isChecked());
             plan.setWeek(week.isChecked());
             plan.setMonth(month.isChecked());
             plan.setYear(year.isChecked());
@@ -258,17 +278,17 @@ public class AddPlanViewSet extends Fragment {
     private boolean checkAllForms() {
         if (name == null || name.getText().toString().equals("")) {
             Toast.makeText(getActivity(), R.string.please_set_name_of_plan, Toast.LENGTH_SHORT).show();
-            name.requestFocus();
+//            name.requestFocus();
             return false;
         }
         if (textMessage == null || textMessage.getText().toString().equals("")) {
             Toast.makeText(getActivity(), R.string.please_set_text_of_message, Toast.LENGTH_SHORT).show();
-            textMessage.requestFocus();
+//            textMessage.requestFocus();
             return false;
         }
         if (groupList==null){
             Toast.makeText(getActivity(), R.string.please_select_group, Toast.LENGTH_SHORT).show();
-            selectGroup.requestFocus();
+//            selectGroup.requestFocus();
             return false;
         }
 
