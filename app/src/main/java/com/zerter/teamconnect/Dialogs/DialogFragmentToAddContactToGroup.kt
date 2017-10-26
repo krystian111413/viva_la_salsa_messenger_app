@@ -76,7 +76,7 @@ class DialogFragmentToAddContactToGroup: DialogFragment() {
 
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            var convertView = convertView
+            val convertView: View?
             val grupa = getItem(position)
             val inflater = activity.layoutInflater
             convertView = inflater.inflate(R.layout.grupa_kontaktow_to_select, null)

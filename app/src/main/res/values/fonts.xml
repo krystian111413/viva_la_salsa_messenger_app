@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="Oswald_Bold" translatable="false">fonts/Oswald-Bold.ttf</string>
+    <string name="Oswald_Light" translatable="false">fonts/Oswald-Light.ttf</string>
 </resources>
