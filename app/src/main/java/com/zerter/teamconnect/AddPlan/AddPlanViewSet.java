@@ -174,7 +174,10 @@ public class AddPlanViewSet extends Fragment {
     }
 
     private void setAdapter() {
-        String groups = getActivity().getIntent().getExtras().getString("groups");
+        String groups = null;
+        if (getActivity().getIntent().getExtras() != null) {
+            groups = getActivity().getIntent().getExtras().getString("groups");
+        }
         Type type = new TypeToken<List<Group>>() {
         }.getType();
         List<Group> groupList = new Gson().fromJson(groups, type);
