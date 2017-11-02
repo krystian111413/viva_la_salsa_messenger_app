@@ -5,11 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.zerter.teamconnect.BuildConfig;
 import com.zerter.teamconnect.R;
 
 public class AdMobs extends Activity {
@@ -24,6 +28,12 @@ public class AdMobs extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad_mobs);
+        if (!BuildConfig.APPLICATION_ID.equals("com.zerter.vivaLaSalsa")){
+            RelativeLayout RL = (RelativeLayout) findViewById(R.id.layoutAdmobs);
+            RL.setBackground(getResources().getDrawable(R.drawable.logo));
+            FrameLayout name = (FrameLayout) findViewById(R.id.LogoFrameLayout);
+            name.setVisibility(View.GONE);
+        }
 
         mInterstitialAd = newInterstitialAd();
         loadInterstitial();

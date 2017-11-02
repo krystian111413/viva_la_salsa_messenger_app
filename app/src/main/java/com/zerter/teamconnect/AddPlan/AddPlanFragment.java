@@ -4,9 +4,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.R;
+import com.zerter.teamconnect.Service.MessageService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +60,14 @@ public class AddPlanFragment extends Fragment {
 
 
         setAdapter();
+
+        if (getPlans() != null && getPlans().size() > 0) {
+            Log.d("Plan","startService");
+            getActivity().startService(new Intent(getActivity(), MessageService.class));
+        }else {
+            Log.d("Plan","stopService");
+            getActivity().stopService(new Intent(getActivity(), MessageService.class));
+        }
     }
 
     @Override

@@ -44,7 +44,7 @@ public class AddPlanViewSet extends Fragment {
 
 
     Button add, selectGroup;
-    EditText name, textMessage;
+    EditText name, textMessage, timeOld;
     DatePicker datePicker;
     TimePicker time;
     Switch day, week, month, year;
@@ -69,9 +69,12 @@ public class AddPlanViewSet extends Fragment {
         week = (Switch) view.findViewById(R.id.switchOfWeek);
         month = (Switch) view.findViewById(R.id.switchOfMonth);
         year = (Switch) view.findViewById(R.id.switchOfYear);
-        time = (TimePicker) view.findViewById(R.id.timePicker);
         selectedGroups = (ListView) view.findViewById(R.id.listViewSelectedGroups);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            time = (TimePicker) view.findViewById(R.id.timePicker);
+        }else {
+            timeOld = (EditText) view.findViewById(R.id.editTextTime);
+        }
         plan = new Gson().fromJson(getArguments().getString("plan"),Plan.class);
 
         return view;
@@ -257,10 +260,13 @@ public class AddPlanViewSet extends Fragment {
             plan.setName(name.getText().toString().trim());
             String date = "";
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                date = time.getHour() + ":" + time.getMinute() + " " + datePicker.getDayOfMonth() + "-" + datePicker.getMonth() + "-" + datePicker.getYear();
+                date = datePicker.getYear() + "/" + datePicker.getMonth() + "/" + datePicker.getDayOfMonth() + " - "
+                        +  time.getHour() + ":" + time.getMinute() + ":00";
+//                date = time.getHour() + ":" + time.getMinute() + " " + datePicker.getDayOfMonth() + "-" + datePicker.getMonth() + "-" + datePicker.getYear();
 
             } else {
-                date = datePicker.getDayOfMonth() + "-" + datePicker.getMonth() + "-" + datePicker.getYear();
+                date = datePicker.getDayOfMonth() + "-" + datePicker.getMonth() + "-" + datePicker.getYear() + " - "
+                + timeOld.getText();
             }
 
             plan.setDate(date);
@@ -293,6 +299,12 @@ public class AddPlanViewSet extends Fragment {
             Toast.makeText(getActivity(), R.string.please_select_group, Toast.LENGTH_SHORT).show();
 //            selectGroup.requestFocus();
             return false;
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            if (timeOld == null || timeOld.getText().toString().equals("")){
+                Toast.makeText(getActivity(), "Please set time", Toast.LENGTH_SHORT).show();
+                return false;
+            }
         }
 
         return true;

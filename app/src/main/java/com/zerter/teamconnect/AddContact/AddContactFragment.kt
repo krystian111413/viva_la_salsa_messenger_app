@@ -1,21 +1,18 @@
 package com.zerter.teamconnect.AddContact
 
 import android.app.Activity
-import android.os.Bundle
 import android.app.Fragment
-
+import android.content.ContentProviderOperation
+import android.content.Intent
+import android.os.Bundle
+import android.provider.ContactsContract
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.zerter.teamconnect.R
-import android.widget.Toast
-import android.provider.ContactsContract
-import android.content.ContentProviderOperation
-import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.zerter.teamconnect.Controlers.Data
@@ -23,8 +20,8 @@ import com.zerter.teamconnect.Controlers.MyTextView
 import com.zerter.teamconnect.Dialogs.DialogFragmentToAddContactToGroup
 import com.zerter.teamconnect.Models.Group
 import com.zerter.teamconnect.Models.Person
+import com.zerter.teamconnect.R
 import kotlinx.android.synthetic.main.add_contact_view.*
-import kotlinx.android.synthetic.main.select_group_to_add_to_contact.*
 
 
 /**
@@ -39,7 +36,7 @@ class AddContactFragment: Fragment(){
         val view: View = inflater!!.inflate(R.layout.add_contact_view,container,false)
 
 
-        listView = view.findViewById(R.id.listViewGroupsToAddToContact) as ListView?
+        listView =  view.findViewById<ListView>(R.id.listViewGroupsToAddToContact)
 
         return view;
     }
@@ -104,7 +101,7 @@ class AddContactFragment: Fragment(){
             if (viewList.size > position && viewList[position] != null) {
                 return viewList[position]
             }
-            val name = view!!.findViewById(R.id.myTextViewContacts) as MyTextView
+            val name = view!!.findViewById<MyTextView>(R.id.myTextViewContacts)
             if (grupa != null) {
                 name.text = grupa.name
             } else {

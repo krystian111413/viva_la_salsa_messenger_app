@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Team Connect</string>
+    <!--<string name="app_name" translatable="false">Team Connect</string>-->
     <string name="hint_pola_wiadomosci">Your messege...</string>
     <string name="send_button">Wyślij</string>
     <string name="title_activity_main">Messenger Viva la Salsa</string>
@@ -17,7 +17,7 @@
         This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
         For more information, see https://support.google.com/admob/answer/3052638
     <!- -->
-    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-7387128384946273~6821690422</string>
     <string name="title_activity_general" translatable="false">GeneralActivity</string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>

@@ -3,15 +3,26 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 25
+    signingConfigs {
+        Config {
+            keyAlias 'Krystian'
+            keyPassword 'Kkrcbvcq'
+            storeFile file('/Users/krystiankowalski/Documents/keystore.jks')
+            storePassword 'Kkrcbvcq'
+        }
+    }
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
+    flavorDimensions "default"
     defaultConfig {
         applicationId "com.zerter.teamconnect"
         minSdkVersion 22
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 26
+        versionCode 2
+        versionName '1.0.1'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        signingConfig signingConfigs.Config
     }
     buildTypes {
         release {
@@ -19,23 +30,46 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        vivaLaSalsa {
+            minSdkVersion 22
+            applicationId 'com.zerter.vivaLaSalsa'
+            targetSdkVersion 26
+            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+            versionCode 1
+            versionName '1.0'
+            signingConfig signingConfigs.Config
+            resValue "string", "app_name", "Viva La Salsa Messenger"
+        }
+        TeamConnect {
+            minSdkVersion 22
+            applicationId 'com.zerter.teamconnect'
+            targetSdkVersion 26
+            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+            versionCode 2
+            versionName '1.0.1'
+            signingConfig signingConfigs.Config
+            resValue "string", "app_name", "Team Connect"
+        }
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'com.google.android.gms:play-services-ads:11.0.4'
+    compile 'com.android.support:design:26.1.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.google.android.gms:play-services-ads:11.4.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.github.aakira:expandable-layout:1.6.0@aar'
     testCompile 'junit:junit:4.12'
 }
 repositories {
     mavenCentral()
+    google()
 }

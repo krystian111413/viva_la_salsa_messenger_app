@@ -10,10 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
 import com.google.gson.Gson
-import com.zerter.teamconnect.AddContact.AddContact
 import com.zerter.teamconnect.AddContact.AddContactFragment
 import com.zerter.teamconnect.AddContact.OnResult
 import com.zerter.teamconnect.Controlers.Data
@@ -21,7 +19,7 @@ import com.zerter.teamconnect.Controlers.MyTextView
 import com.zerter.teamconnect.Models.Group
 import com.zerter.teamconnect.R
 import kotlinx.android.synthetic.main.select_group_to_add_to_contact.*
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Dialog fragment for add contact to group in add contact view
@@ -84,7 +82,7 @@ class DialogFragmentToAddContactToGroup: DialogFragment() {
             if (viewList.size > position && viewList[position] != null) {
                 return viewList[position]
             }
-            val name = convertView!!.findViewById(R.id.myTextViewContacts) as MyTextView
+            val name = convertView!!.findViewById<MyTextView>(R.id.myTextViewContacts) as MyTextView
             if (grupa != null) {
                 name.text = grupa.name
             } else {
