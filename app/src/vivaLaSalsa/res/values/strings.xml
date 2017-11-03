@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Team Connect</string>
+    <string name="app_name" translatable="false">Viva La Salsa Messenger</string>
     <string name="hint_pola_wiadomosci">Your messege...</string>
     <string name="send_button">Wyślij</string>
     <string name="title_activity_main">Messenger Viva la Salsa</string>

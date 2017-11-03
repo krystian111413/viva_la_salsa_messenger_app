@@ -39,7 +39,8 @@ android {
             versionCode 1
             versionName '1.0'
             signingConfig signingConfigs.Config
-            resValue "string", "app_name", "Viva La Salsa Messenger"
+//            resValue "string", "app_name", "Viva La Salsa Messenger"
+            
         }
         TeamConnect {
             minSdkVersion 22
@@ -49,7 +50,8 @@ android {
             versionCode 2
             versionName '1.0.1'
             signingConfig signingConfigs.Config
-            resValue "string", "app_name", "Team Connect"
+//            resValue "string", "app_name", "Team Connect"
+//            resValue "drawable", "app_name", "Team Connect"
         }
     }
 }
