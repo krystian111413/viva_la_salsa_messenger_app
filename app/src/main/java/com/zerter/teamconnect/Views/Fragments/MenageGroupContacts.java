@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +79,11 @@ public class MenageGroupContacts extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     public void setAdapter(int typeList) {

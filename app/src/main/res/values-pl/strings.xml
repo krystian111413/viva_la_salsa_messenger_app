@@ -42,4 +42,6 @@
     <string name="please_set_text_of_message">Proszę uzupenij pole treści wiadomości</string>
     <string name="repeat_every_day">Powtarzaj co dzien</string>
     <string name="please_select_group">Proszę wybrać grupę</string>
+    <string name="you_have_no_group">Nie posiadasz żadnej grupy</string>
+    <string name="yes">Tak</string>
 </resources>

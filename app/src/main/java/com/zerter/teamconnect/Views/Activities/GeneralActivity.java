@@ -183,7 +183,7 @@ public class GeneralActivity extends AppCompatActivity
     }
 
     private void setContener(android.app.Fragment fragment){
-        FragmentManager FM = getFragmentManager();
+        FragmentManager FM = this.getFragmentManager();
         FragmentTransaction FT = FM.beginTransaction();
         FT.replace(R.id.GeneralContener, fragment);
         FT.commit();

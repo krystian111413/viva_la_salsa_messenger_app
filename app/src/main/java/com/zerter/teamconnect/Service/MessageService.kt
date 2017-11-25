@@ -4,7 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.Handler
 import android.os.IBinder
-import android.widget.Toast
+import android.util.Log
 import com.zerter.teamconnect.AddPlan.Plan
 import com.zerter.teamconnect.Controlers.Data
 import java.text.SimpleDateFormat
@@ -54,11 +54,14 @@ class MessageService: Service() {
             mHandler.post(Runnable {
 
                 getPlans()?.forEach { plan ->
-                    if (sdf.format(Date()) > Date.parse(dateTime).toString()){
-                        //Todo Sprawdzic jak dziala if i sprobowac wyslac wiadomosc
-                        Toast.makeText(applicationContext,dateTime,Toast.LENGTH_SHORT).show()
-                    }
-                };
+                    Log.d("czas",sdf.format(Date()))
+                    Log.d("czas2",plan.date)
+
+//                    if (sdf.format(Date()) > Date.parse(dateTime).toString()){
+//                        //Todo Sprawdzic jak dziala if i sprobowac wyslac wiadomosc
+//                        Toast.makeText(applicationContext,dateTime,Toast.LENGTH_SHORT).show()
+//                    }
+                }
             })
         }
 

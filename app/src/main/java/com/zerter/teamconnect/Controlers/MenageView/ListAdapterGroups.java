@@ -1,7 +1,7 @@
 package com.zerter.teamconnect.Controlers.MenageView;
 
 import android.app.Activity;
-import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import com.google.gson.Gson;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MyTextView;
+import com.zerter.teamconnect.Dialogs.ConfirmDecisionDialog;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.R;
 import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
@@ -27,12 +28,13 @@ import java.util.List;
 public class ListAdapterGroups extends ArrayAdapter<Group> {
     private List<Group> groupList = new ArrayList<>();
     Data data;
-    Context context;
-    public ListAdapterGroups(@NonNull Context context, List<Group> groupList) {
-        super(context, 0, groupList);
+//    Context context;
+    Activity activity;
+    public ListAdapterGroups(@NonNull Activity activity, List<Group> groupList) {
+        super(activity, 0, groupList);
         this.groupList = groupList;
-        this.data = new Data(context);
-        this.context = context;
+        this.data = new Data(activity);
+        this.activity = activity;
     }
 
     @NonNull
@@ -56,21 +58,28 @@ public class ListAdapterGroups extends ArrayAdapter<Group> {
             @Override
             public void onClick(View v) {
 
-                if (groupList.contains(getItem(position))) {
-                    groupList.remove(getItem(position));
-                    data.setGroups(new Gson().toJson(groupList));
-                    ListAdapterGroups listAdapterGroups = new ListAdapterGroups(getContext(),groupList);
-                    if (MenageGroupContacts.listView != null){
-                        MenageGroupContacts.listView.setAdapter(listAdapterGroups);
-                    }
-                }
+                ConfirmDecisionDialog dialog = new ConfirmDecisionDialog();
+                Bundle bundle = new Bundle();
+                bundle.putString("group",new Gson().toJson(grupa));
+                dialog.setArguments(bundle);
+                dialog.show(activity.getFragmentManager(),ConfirmDecisionDialog.class.getName());
+
+
+//                if (groupList.contains(getItem(position))) {
+//                    groupList.remove(getItem(position));
+//                    data.setGroups(new Gson().toJson(groupList));
+//                    ListAdapterGroups listAdapterGroups = new ListAdapterGroups(getContext(),groupList);
+//                    if (MenageGroupContacts.listView != null){
+//                        MenageGroupContacts.listView.setAdapter(listAdapterGroups);
+//                    }
+//                }
             }
         });
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ListAdapterContacts listAdapterContacts = new ListAdapterContacts((Activity) context,data.getContacts(),grupa);
+                ListAdapterContacts listAdapterContacts = new ListAdapterContacts((Activity) activity,data.getContacts(),grupa);
                 if (MenageGroupContacts.listView != null){
                     MenageGroupContacts.listView.setAdapter(listAdapterContacts);
                     MenageGroupContacts.groupView = false;
@@ -80,4 +89,10 @@ public class ListAdapterGroups extends ArrayAdapter<Group> {
 
         return convertView;
     }
+
+
+
+
+
+
 }

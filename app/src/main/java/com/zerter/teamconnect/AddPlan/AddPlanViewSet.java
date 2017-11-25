@@ -108,10 +108,14 @@ public class AddPlanViewSet extends Fragment {
         selectGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
-                DialogFragmentToAddContactToGroup dialog = new DialogFragmentToAddContactToGroup();
-                dialog.setTargetFragment(fragment, DIALOG_FRAGMENT);
-                dialog.show(fragmentManager, "DialogFragmentToAddContactToGroup");
+                if (new Data(getActivity()).getGroups() != null) {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    DialogFragmentToAddContactToGroup dialog = new DialogFragmentToAddContactToGroup();
+                    dialog.setTargetFragment(fragment, DIALOG_FRAGMENT);
+                    dialog.show(fragmentManager, "DialogFragmentToAddContactToGroup");
+                }else {
+                    Toast.makeText(getActivity(), R.string.you_have_no_group, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -1,14 +1,17 @@
 package com.zerter.teamconnect.Views.Fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +43,6 @@ public class Message extends Fragment {
         wyslij = (Button) view.findViewById(R.id.button_wyslij);
         editTextTrescWiadomosci = (EditText) view.findViewById(R.id.editText_tresc_smsa);
         listView = (ListView) view.findViewById(R.id.ListViewListaGrupKontaktow);
-
         return view;
     }
 
@@ -66,10 +68,16 @@ public class Message extends Fragment {
                 }
             }
         });
+
+        hideSoftKeyboard(getActivity());
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
+    }
 
     private void setAdapter(){
         if (data.getTemplates() != null){
@@ -108,5 +116,15 @@ public class Message extends Fragment {
         }
 
 
+    }
+
+    public void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null && activity.getCurrentFocus() != null) {
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        }else {
+            Toast.makeText(activity, "error hideSoftKeyboard", Toast.LENGTH_SHORT).show();
+            Log.e("hideSoftKeyboard","nputMethodManager == null && activity.getCurrentFocus() == null");
+        }
     }
 }
