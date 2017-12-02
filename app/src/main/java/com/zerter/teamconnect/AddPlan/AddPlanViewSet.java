@@ -73,7 +73,7 @@ public class AddPlanViewSet extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             time = (TimePicker) view.findViewById(R.id.timePicker);
         }else {
-            timeOld = (EditText) view.findViewById(R.id.editTextTime);
+            //timeOld = (EditText) view.findViewById(R.id.editTextTime);
         }
         plan = new Gson().fromJson(getArguments().getString("plan"),Plan.class);
 
