@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -50,55 +51,68 @@
                 android:text="@string/select_a_group"
                 android:background="?actionBarItemBackground"
                 android:id="@+id/selectGroupAddPlan"/>
+
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/listViewSelectedGroups"/>
-            <DatePicker
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/calendar"
-                android:layout_marginBottom="10dp"/>
 
-            <TimePicker
+            <com.zerter.teamconnect.Controlers.MyButton
+                android:id="@+id/buttonDateSet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:id="@+id/timePicker"/>
-            <Switch
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/repeat_every_day"
-                android:id="@+id/switchOfDay"
+                android:background="?actionBarItemBackground"
+                android:text="@string/set_date"
+                app:customFont="@string/Oswald_Bold"
                 android:textColor="@color/textColor"
-                android:textSize="24sp"
-                android:layout_marginBottom="10dp"/>
-            <Switch
+                android:gravity="start|center_vertical"
+                android:layout_marginTop="10dp"/>
+            <!--<DatePicker-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/calendar"-->
+                <!--android:layout_marginBottom="10dp"/>-->
+
+            <com.zerter.teamconnect.Controlers.MyButton
+                android:id="@+id/buttonTimeSet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/repeat_every_week"
-                android:id="@+id/switchOfWeek"
+                android:background="?actionBarItemBackground"
+                android:text="@string/set_time"
+                app:customFont="@string/Oswald_Bold"
                 android:textColor="@color/textColor"
-                android:textSize="24sp"
-                android:layout_marginBottom="10dp"/>
-            <Switch
+                android:gravity="start|center_vertical"
+                android:layout_marginTop="10dp"/>
+
+            <!--<TimePicker-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:id="@+id/timePicker"/>-->
+
+            <com.zerter.teamconnect.Controlers.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/repeat_every_month"
-                android:id="@+id/switchOfMonth"
+                android:id="@+id/infoRepeatTextView"
+                android:textSize="18sp"
+                android:text="@string/repeat"
                 android:textColor="@color/textColor"
-                android:textSize="24sp"
-                android:layout_marginBottom="10dp"/>
-            <Switch
+                app:customFont="@string/Oswald_Light"
+                android:gravity="start"
+                android:layout_marginTop="10dp"/>
+
+            <SeekBar
+                android:id="@+id/seekBarRepeatMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/repeat_every_year"
-                android:id="@+id/switchOfYear"
-                android:textColor="@color/textColor"
-                android:textSize="24sp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginTop="10dp"
+                android:max="4"
+                android:progress="0"
+                android:scrollbarSize="20dp"/>
+
             <com.zerter.teamconnect.Controlers.MyEditText
+                android:layout_marginTop="20dp"
                 android:id="@+id/editText_tresc_smsa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,8 +121,7 @@
                 android:gravity="top|start"
                 android:hint="@string/hint_pola_wiadomosci"
                 android:padding="5dp"
-                app:customFont="fonts/Oswald-Light.ttf"
-                android:layout_marginBottom="20dp"/>
+                app:customFont="fonts/Oswald-Light.ttf" />
 
 
         </LinearLayout>

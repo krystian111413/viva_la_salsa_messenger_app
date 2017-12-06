@@ -13,19 +13,17 @@ public class Plan {
     private String date;
     private String text;
     private String name;
-    private Boolean day;
-    private Boolean week;
-    private Boolean month;
-    private Boolean year;
+    private Integer repeatValue; // 0 - 4: none -> daily -> weekly -> monthly -> yearly
+
+    public Integer getRepeatValue() {
+        return repeatValue;
+    }
+
+    public void setRepeatValue(Integer repeatValue) {
+        this.repeatValue = repeatValue;
+    }
+
     private List<Group> groups = new ArrayList<>();
-
-    public Boolean getDay() {
-        return day;
-    }
-
-    public void setDay(Boolean day) {
-        this.day = day;
-    }
 
     public String getName() {
         return name;
@@ -49,30 +47,6 @@ public class Plan {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public Boolean getWeek() {
-        return week;
-    }
-
-    public void setWeek(Boolean week) {
-        this.week = week;
-    }
-
-    public Boolean getMonth() {
-        return month;
-    }
-
-    public void setMonth(Boolean month) {
-        this.month = month;
-    }
-
-    public Boolean getYear() {
-        return year;
-    }
-
-    public void setYear(Boolean year) {
-        this.year = year;
     }
 
     public List<Group> getGroups() {

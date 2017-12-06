@@ -14,18 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Switch;
+import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zerter.teamconnect.Controlers.Data;
+import com.zerter.teamconnect.Controlers.MyTextView;
 import com.zerter.teamconnect.Dialogs.DialogFragmentToAddContactToGroup;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.R;
@@ -43,18 +42,16 @@ import static android.app.Activity.RESULT_OK;
 public class AddPlanViewSet extends Fragment {
 
 
-    Button add, selectGroup;
+    Button add, selectGroup, setTime, setDate;
     EditText name, textMessage, timeOld;
-    DatePicker datePicker;
-    TimePicker time;
-    Switch day, week, month, year;
     Integer DIALOG_FRAGMENT = 1;
     Fragment fragment;
     ListView selectedGroups;
     List<Group> groupList = null;
-
+    MyTextView repeatInfo;
+    SeekBar seekBarRepeatMessage;
     Plan plan = null;
-
+    String defaultValueFromTextView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -64,26 +61,19 @@ public class AddPlanViewSet extends Fragment {
         selectGroup = (Button) view.findViewById(R.id.selectGroupAddPlan);
         name = (EditText) view.findViewById(R.id.nameOfPlan);
         textMessage = (EditText) view.findViewById(R.id.editText_tresc_smsa);
-        datePicker = (DatePicker) view.findViewById(R.id.calendar);
-        day = (Switch) view.findViewById(R.id.switchOfDay);
-        week = (Switch) view.findViewById(R.id.switchOfWeek);
-        month = (Switch) view.findViewById(R.id.switchOfMonth);
-        year = (Switch) view.findViewById(R.id.switchOfYear);
         selectedGroups = (ListView) view.findViewById(R.id.listViewSelectedGroups);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            time = (TimePicker) view.findViewById(R.id.timePicker);
-        }else {
-            //timeOld = (EditText) view.findViewById(R.id.editTextTime);
-        }
+        repeatInfo = view.findViewById(R.id.infoRepeatTextView);
+        seekBarRepeatMessage = view.findViewById(R.id.seekBarRepeatMessage);
         plan = new Gson().fromJson(getArguments().getString("plan"),Plan.class);
-
+        setTime = view.findViewById(R.id.buttonTimeSet);
+        setDate = view.findViewById(R.id.buttonDateSet);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        defaultValueFromTextView = repeatInfo.getText().toString();
         fragment = this;
 
         add.setOnClickListener(new View.OnClickListener() {
@@ -97,11 +87,11 @@ public class AddPlanViewSet extends Fragment {
             add.setText(R.string.save);
             name.setText(plan.getName());
             textMessage.setText(plan.getText());
-            day.setChecked(plan.getDay());
-            week.setChecked(plan.getWeek());
-            month.setChecked(plan.getMonth());
-            year.setChecked(plan.getYear());
+            seekBarRepeatMessage.setProgress(plan.getRepeatValue());
+            setValueRepeatMessageTextView(plan.getRepeatValue());
             setAdapter();
+        }else {
+            setValueRepeatMessageTextView(0);
         }
 
 
@@ -119,58 +109,58 @@ public class AddPlanViewSet extends Fragment {
             }
         });
 
-        setSwichersLogic();
+
+
+        logicOfSeeBar();
 
     }
 
-    private void setSwichersLogic() {
-        day.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (day.isChecked()) {
-                    week.setChecked(true);
-                    month.setChecked(true);
-                    year.setChecked(true);
-                }
-            }
-        });
-        week.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (week.isChecked()) {
+    private void logicOfSeeBar() {
 
-                    month.setChecked(true);
-                    year.setChecked(true);
-                }else {
-                    day.setChecked(false);
-                }
-            }
-        });
-        month.setOnClickListener(new View.OnClickListener() {
+        seekBarRepeatMessage.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onClick(View view) {
-                if (month.isChecked()) {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setValueRepeatMessageTextView(progress);
+            }
 
-                    month.setChecked(true);
-                    year.setChecked(true);
-                }else {
-                    day.setChecked(false);
-                    week.setChecked(false);
-                }
-            }
-        });
-        year.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (!year.isChecked()){
-                    day.setChecked(false);
-                    week.setChecked(false);
-                    month.setChecked(false);
-                }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
     }
 
+    private void setValueRepeatMessageTextView(Integer seeBarProgress){
+
+        String value;
+        switch (seeBarProgress){
+            case 0:
+                value = defaultValueFromTextView + getString(R.string.none);
+                repeatInfo.setText(value);
+                break;
+            case 1:
+                value = defaultValueFromTextView + getString(R.string.daily);
+                repeatInfo.setText(value);
+                break;
+            case 2:
+                value = defaultValueFromTextView + getString(R.string.weekly);
+                repeatInfo.setText(value);
+                break;
+            case 3:
+                value = defaultValueFromTextView + getString(R.string.monthly);
+                repeatInfo.setText(value);
+                break;
+            case 4:
+                value = defaultValueFromTextView + getString(R.string.yearly);
+                repeatInfo.setText(value);
+                break;
+        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -263,22 +253,23 @@ public class AddPlanViewSet extends Fragment {
             Plan plan = new Plan();
             plan.setName(name.getText().toString().trim());
             String date = "";
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                date = datePicker.getYear() + "/" + datePicker.getMonth() + "/" + datePicker.getDayOfMonth() + " - "
-                        +  time.getHour() + ":" + time.getMinute() + ":00";
-//                date = time.getHour() + ":" + time.getMinute() + " " + datePicker.getDayOfMonth() + "-" + datePicker.getMonth() + "-" + datePicker.getYear();
 
-            } else {
-                date = datePicker.getDayOfMonth() + "-" + datePicker.getMonth() + "-" + datePicker.getYear() + " - "
-                + timeOld.getText();
-            }
+
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                date = datePicker.getYear() + "/" + datePicker.getMonth() + "/" + datePicker.getDayOfMonth() + " - "
+//                        +  time.getHour() + ":" + time.getMinute() + ":00";
+////                date = time.getHour() + ":" + time.getMinute() + " " + datePicker.getDayOfMonth() + "-" + datePicker.getMonth() + "-" + datePicker.getYear();
+//
+//            } else {
+//                date = datePicker.getDayOfMonth() + "-" + datePicker.getMonth() + "-" + datePicker.getYear() + " - "
+//                + timeOld.getText();
+//            }
 
             plan.setDate(date);
             plan.setText(textMessage.getText().toString());
-            plan.setDay(day.isChecked());
-            plan.setWeek(week.isChecked());
-            plan.setMonth(month.isChecked());
-            plan.setYear(year.isChecked());
+
+            Integer seeBarValue = seekBarRepeatMessage.getProgress(); // 0 - 4: none -> daily -> weekly -> monthly -> yearly
+            plan.setRepeatValue(seeBarValue);
             plan.setGroups(groupList);
 
 
