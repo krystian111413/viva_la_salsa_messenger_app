@@ -36,8 +36,8 @@ android {
             applicationId 'com.zerter.vivaLaSalsa'
             targetSdkVersion 26
             testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-            versionCode 4
-            versionName '1.2.0'
+            versionCode 5
+            versionName '1.2.1'
             signingConfig signingConfigs.Config
 //            resValue "string", "app_name", "Viva La Salsa Messenger"
             
