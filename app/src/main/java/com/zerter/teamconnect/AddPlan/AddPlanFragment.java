@@ -4,9 +4,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.R;
+import com.zerter.teamconnect.Service.MessageService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +60,14 @@ public class AddPlanFragment extends Fragment {
 
 
         setAdapter();
+
+        if (getPlans() != null && getPlans().size() > 0) {
+            Log.d("Plan","startService");
+            getActivity().startService(new Intent(getActivity(), MessageService.class));
+        }else {
+            Log.d("Plan","stopService");
+            getActivity().stopService(new Intent(getActivity(), MessageService.class));
+        }
     }
 
     @Override
@@ -76,7 +87,12 @@ public class AddPlanFragment extends Fragment {
         if (object.length > 0){
             bundle.putString("plan",object[0]);
         }
-        AddPlanViewSet viewFragment = new AddPlanViewSet();
+        AddPlanViewSet viewFragment = new AddPlanViewSet(new EventListener() {
+            @Override
+            public void onEvent() {
+                setAdapter();
+            }
+        });
         viewFragment.setArguments(bundle);
         FragmentManager FM = getFragmentManager();
         FragmentTransaction FT = FM.beginTransaction();
@@ -89,6 +105,8 @@ public class AddPlanFragment extends Fragment {
         if (getPlans() != null){
             Adapter adapter = new Adapter(getActivity(),getPlans());
             plans.setAdapter(adapter);
+            Log.d("Plan","startService");
+            getActivity().startService(new Intent(getActivity(), MessageService.class));
         }
 
     }
@@ -132,15 +150,24 @@ public class AddPlanFragment extends Fragment {
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    List<Plan> plansTmp = new ArrayList<>();
-                    for (Plan plan:
-                         planList) {
-                        if (getItem(position).getName() != plan.getName()){
-                            plansTmp.add(plan);
+                    ConfirmDialog dialog = new ConfirmDialog(new OnConfirm() {
+                        @Override
+                        public void onConfirm(Boolean decision) {
+                            if (decision){
+                                List<Plan> plansTmp = new ArrayList<>();
+                                for (Plan plan:
+                                        planList) {
+                                    if (!getItem(position).getName().equals(plan.getName())){
+                                        plansTmp.add(plan);
+                                    }
+                                }
+                                data.setMessagesPlaned(new Gson().toJson(plansTmp));
+                                setAdapter();
+                            }
                         }
-                    }
-                    data.setMessagesPlaned(new Gson().toJson(plansTmp));
-                    setAdapter();
+                    });
+                    dialog.show(getActivity().getFragmentManager(),dialog.getClass().getName());
+
                 }
             });
             return convertView;

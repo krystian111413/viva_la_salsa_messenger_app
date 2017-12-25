@@ -42,4 +42,16 @@
     <string name="please_set_text_of_message">Proszę uzupenij pole treści wiadomości</string>
     <string name="repeat_every_day">Powtarzaj co dzien</string>
     <string name="please_select_group">Proszę wybrać grupę</string>
+    <string name="you_have_no_group">Nie posiadasz żadnej grupy</string>
+    <string name="yes">Tak</string>
+    <string name="repeat">"Powtarzaj: "</string>
+    <string name="none">brak</string>
+    <string name="daily">codziennie</string>
+    <string name="weekly">tygodniowo</string>
+    <string name="monthly">miesięcznie</string>
+    <string name="yearly">rocznie</string>
+    <string name="set_time">Ustaw godzinę</string>
+    <string name="set_date">Ustaw date</string>
+    <string name="please_set_date">Proszę ustaw datę</string>
+    <string name="please_set_time">Proszę ustaw godzinę</string>
 </resources>

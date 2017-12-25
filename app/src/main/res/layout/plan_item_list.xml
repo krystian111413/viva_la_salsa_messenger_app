@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -20,7 +21,8 @@
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
         android:textStyle="bold|italic"
-        app:customFont="fonts/Oswald-Light.ttf" />
+        app:customFont="fonts/Oswald-Light.ttf"
+        android:layout_toLeftOf="@+id/imageButtonDelete" />
 
     <ImageButton
         android:id="@+id/imageButtonDelete"
@@ -30,7 +32,8 @@
         android:background="?android:selectableItemBackground"
         app:srcCompat="@android:drawable/ic_menu_delete"
         android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/planName" />
+        android:layout_alignBottom="@+id/planName"
+        android:layout_toLeftOf="@+id/imageButtonEdit" />
     <ImageButton
         android:id="@+id/imageButtonEdit"
         android:layout_width="wrap_content"
@@ -39,6 +42,8 @@
         android:background="?android:selectableItemBackground"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/imageButtonDelete" />
+        android:layout_alignBottom="@+id/imageButtonDelete"
+        tools:ignore="VectorDrawableCompat"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
