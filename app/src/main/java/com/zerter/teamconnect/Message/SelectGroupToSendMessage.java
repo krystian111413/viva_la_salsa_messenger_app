@@ -1,11 +1,10 @@
-package com.zerter.teamconnect.Dialogs;
+package com.zerter.teamconnect.Message;
 
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,7 @@ import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.Models.Message;
 import com.zerter.teamconnect.Models.Person;
 import com.zerter.teamconnect.R;
-import com.zerter.teamconnect.Views.Activities.GeneralActivity;
+import com.zerter.teamconnect.GeneralActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;

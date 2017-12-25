@@ -1,4 +1,4 @@
-package com.zerter.teamconnect.Views.Fragments;
+package com.zerter.teamconnect.Message;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MyTextView;
-import com.zerter.teamconnect.Dialogs.SelectGroupToSendMessage;
 import com.zerter.teamconnect.Models.Template;
 import com.zerter.teamconnect.R;
 

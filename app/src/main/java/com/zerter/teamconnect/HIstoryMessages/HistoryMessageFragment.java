@@ -1,4 +1,4 @@
-package com.zerter.teamconnect;
+package com.zerter.teamconnect.HIstoryMessages;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -18,6 +18,7 @@ import com.github.aakira.expandablelayout.ExpandableWeightLayout;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MyTextView;
 import com.zerter.teamconnect.Models.Message;
+import com.zerter.teamconnect.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

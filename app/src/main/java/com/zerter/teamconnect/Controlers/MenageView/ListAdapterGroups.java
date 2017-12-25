@@ -13,10 +13,10 @@ import android.widget.ImageButton;
 import com.google.gson.Gson;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MyTextView;
-import com.zerter.teamconnect.Dialogs.ConfirmDecisionDialog;
+import com.zerter.teamconnect.MenageGroup.ConfirmDecisionDialog;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.R;
-import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
+import com.zerter.teamconnect.MenageGroup.MenageGroupContacts;
 
 import java.util.ArrayList;
 import java.util.List;

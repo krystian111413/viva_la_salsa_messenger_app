@@ -1,4 +1,4 @@
-package com.zerter.teamconnect.Dialogs
+package com.zerter.teamconnect.AddContact
 
 import android.app.Activity
 import android.app.DialogFragment
@@ -12,8 +12,6 @@ import android.view.Window
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.google.gson.Gson
-import com.zerter.teamconnect.AddContact.AddContactFragment
-import com.zerter.teamconnect.AddContact.OnResult
 import com.zerter.teamconnect.Controlers.Data
 import com.zerter.teamconnect.Controlers.MyTextView
 import com.zerter.teamconnect.Models.Group

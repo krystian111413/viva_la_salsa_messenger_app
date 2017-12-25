@@ -1,6 +1,7 @@
 package com.zerter.teamconnect.Controlers.MenageView;
 
 import android.app.Activity;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -13,7 +14,7 @@ import com.zerter.teamconnect.Controlers.MyTextView;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.Models.Person;
 import com.zerter.teamconnect.R;
-import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
+import com.zerter.teamconnect.MenageGroup.MenageGroupContacts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,10 +114,18 @@ public class ListAdapterContacts extends ArrayAdapter<Person> {
         if (zaznaczoneKontakty != null){
             for (Person person: zaznaczoneKontakty) {
                 if (kontakt != null) {
-                    if (Objects.equals(person.getNumber(), kontakt.getNumber())
-                            && person.getName().equals(kontakt.getName())){
-                        name.setTextColor(getContext().getResources().getColor(R.color.textSelected));
-                        MenageGroupContacts.selectedContacts.add(person);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        if (Objects.equals(person.getNumber(), kontakt.getNumber())
+                                && person.getName().equals(kontakt.getName())){
+                            name.setTextColor(getContext().getResources().getColor(R.color.textSelected));
+                            MenageGroupContacts.selectedContacts.add(person);
+                        }
+                    }else {
+                        if (person.getNumber().equals(kontakt.getNumber())
+                                && person.getName().equals(kontakt.getName())){
+                            name.setTextColor(getContext().getResources().getColor(R.color.textSelected));
+                            MenageGroupContacts.selectedContacts.add(person);
+                        }
                     }
                 }
             }

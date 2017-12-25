@@ -17,7 +17,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.zerter.teamconnect.Controlers.Data
 import com.zerter.teamconnect.Controlers.MyTextView
-import com.zerter.teamconnect.Dialogs.DialogFragmentToAddContactToGroup
 import com.zerter.teamconnect.Models.Group
 import com.zerter.teamconnect.Models.Person
 import com.zerter.teamconnect.R

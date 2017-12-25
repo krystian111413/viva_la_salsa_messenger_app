@@ -1,4 +1,4 @@
-package com.zerter.teamconnect.Views.Activities;
+package com.zerter.teamconnect.AdMobs;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.zerter.teamconnect.BuildConfig;
+import com.zerter.teamconnect.GeneralActivity;
 import com.zerter.teamconnect.R;
 
 public class AdMobs extends Activity {

@@ -1,4 +1,4 @@
-package com.zerter.teamconnect.Views.Fragments;
+package com.zerter.teamconnect.Templates;
 
 import android.app.Fragment;
 import android.content.Context;

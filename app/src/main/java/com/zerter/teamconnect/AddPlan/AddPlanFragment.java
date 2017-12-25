@@ -87,7 +87,12 @@ public class AddPlanFragment extends Fragment {
         if (object.length > 0){
             bundle.putString("plan",object[0]);
         }
-        AddPlanViewSet viewFragment = new AddPlanViewSet();
+        AddPlanViewSet viewFragment = new AddPlanViewSet(new EventListener() {
+            @Override
+            public void onEvent() {
+                setAdapter();
+            }
+        });
         viewFragment.setArguments(bundle);
         FragmentManager FM = getFragmentManager();
         FragmentTransaction FT = FM.beginTransaction();
@@ -100,6 +105,8 @@ public class AddPlanFragment extends Fragment {
         if (getPlans() != null){
             Adapter adapter = new Adapter(getActivity(),getPlans());
             plans.setAdapter(adapter);
+            Log.d("Plan","startService");
+            getActivity().startService(new Intent(getActivity(), MessageService.class));
         }
 
     }
@@ -143,15 +150,24 @@ public class AddPlanFragment extends Fragment {
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    List<Plan> plansTmp = new ArrayList<>();
-                    for (Plan plan:
-                         planList) {
-                        if (getItem(position).getName() != plan.getName()){
-                            plansTmp.add(plan);
+                    ConfirmDialog dialog = new ConfirmDialog(new OnConfirm() {
+                        @Override
+                        public void onConfirm(Boolean decision) {
+                            if (decision){
+                                List<Plan> plansTmp = new ArrayList<>();
+                                for (Plan plan:
+                                        planList) {
+                                    if (!getItem(position).getName().equals(plan.getName())){
+                                        plansTmp.add(plan);
+                                    }
+                                }
+                                data.setMessagesPlaned(new Gson().toJson(plansTmp));
+                                setAdapter();
+                            }
                         }
-                    }
-                    data.setMessagesPlaned(new Gson().toJson(plansTmp));
-                    setAdapter();
+                    });
+                    dialog.show(getActivity().getFragmentManager(),dialog.getClass().getName());
+
                 }
             });
             return convertView;

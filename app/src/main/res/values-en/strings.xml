@@ -52,4 +52,6 @@
     <string name="yearly">yearly</string>
     <string name="set_time">Set time</string>
     <string name="set_date">Set Date</string>
+    <string name="please_set_date">Please set date</string>
+    <string name="please_set_time">Please set time</string>
 </resources>

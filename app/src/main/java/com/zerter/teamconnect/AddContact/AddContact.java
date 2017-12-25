@@ -1,6 +1,5 @@
 package com.zerter.teamconnect.AddContact;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ContentProviderOperation;
@@ -15,19 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.zerter.teamconnect.Controlers.Data;
-import com.zerter.teamconnect.Controlers.MenageView.ListAdapterContacts;
-import com.zerter.teamconnect.Controlers.MenageView.ListAdapterGroups;
 import com.zerter.teamconnect.Controlers.MyTextView;
-import com.zerter.teamconnect.Dialogs.DialogFragmentToAddContactToGroup;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.R;
-import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
 
 import java.util.ArrayList;
 import java.util.List;

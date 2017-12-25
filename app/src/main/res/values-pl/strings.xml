@@ -52,4 +52,6 @@
     <string name="yearly">rocznie</string>
     <string name="set_time">Ustaw godzinę</string>
     <string name="set_date">Ustaw date</string>
+    <string name="please_set_date">Proszę ustaw datę</string>
+    <string name="please_set_time">Proszę ustaw godzinę</string>
 </resources>

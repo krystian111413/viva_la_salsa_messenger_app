@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="15dp"
     android:background="@color/colorPrimary"
-    tools:context=".Dialogs.ConfirmDecisionDialog">
+    tools:context=".MenageGroup.ConfirmDecisionDialog">
 
     <com.zerter.teamconnect.Controlers.MyTextView
         android:id="@+id/textViewConfirmTitle"

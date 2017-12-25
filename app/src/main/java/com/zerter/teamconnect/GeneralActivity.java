@@ -1,4 +1,4 @@
-package com.zerter.teamconnect.Views.Activities;
+package com.zerter.teamconnect;
 
 import android.Manifest;
 import android.app.FragmentManager;
@@ -30,16 +30,16 @@ import com.zerter.teamconnect.AddContact.AddContactFragment;
 import com.zerter.teamconnect.AddPlan.AddPlanFragment;
 import com.zerter.teamconnect.Controlers.CustomTypefaceSpan;
 import com.zerter.teamconnect.Controlers.PermisionControler.OnResultListener;
-import com.zerter.teamconnect.HistoryMessageFragment;
-import com.zerter.teamconnect.R;
-import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
-import com.zerter.teamconnect.Views.Fragments.MenageTemplates;
-import com.zerter.teamconnect.Views.Fragments.Message;
+import com.zerter.teamconnect.HIstoryMessages.HistoryMessageFragment;
+import com.zerter.teamconnect.MenageGroup.MenageGroupContacts;
+import com.zerter.teamconnect.Templates.MenageTemplates;
+import com.zerter.teamconnect.Message.Message;
 
 public class GeneralActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FloatingActionButton fab;
     public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
+    public static final int MY_PERMISSIONS_REQUEST_WRITE_CONTACTS = 1;
     public static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
     private static android.support.v7.app.ActionBar actionBar;
     private String TAG = getClass().getName();
@@ -79,7 +79,8 @@ public class GeneralActivity extends AppCompatActivity
         setContener(message);
         fab.hide();
         setFontsOnMenu(navigationView);
-        hideSoftKeyboard();
+//        hideSoftKeyboard();
+        permisionAccessWriteConstacts();
         permisionAccessSendSMS();
     }
 
@@ -305,6 +306,31 @@ public class GeneralActivity extends AppCompatActivity
             }
         } else {
             listener.onResultAccepted();
+        }
+    }
+    public void permisionAccessWriteConstacts() {
+        Log.d(TAG, "permision 1");
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            Log.d(TAG, "permision 2");
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_CONTACTS)) {
+
+
+                Log.d(TAG, "permision 3");
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_CONTACTS},
+                        MY_PERMISSIONS_REQUEST_WRITE_CONTACTS);
+
+                Log.d(TAG, "permision 4");
+
+            }
+        } else {
+
         }
     }
     public void hideSoftKeyboard() {

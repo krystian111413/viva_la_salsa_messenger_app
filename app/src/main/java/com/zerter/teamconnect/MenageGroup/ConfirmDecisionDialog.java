@@ -1,4 +1,4 @@
-package com.zerter.teamconnect.Dialogs;
+package com.zerter.teamconnect.MenageGroup;
 
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -17,7 +17,6 @@ import com.google.gson.Gson;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.R;
-import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class ConfirmDecisionDialog extends DialogFragment{
         View view = inflater.inflate(R.layout.confirm_dialog,container,false);
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().setCancelable(false);
-        confirm = (Button) view.findViewById(R.id.buttonConfirm);
+        confirm = view.findViewById(R.id.buttonConfirm);
         cancel = view.findViewById(R.id.buttonDismiss);
         return view;
     }

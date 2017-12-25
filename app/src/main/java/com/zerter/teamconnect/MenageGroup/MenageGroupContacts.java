@@ -1,8 +1,10 @@
-package com.zerter.teamconnect.Views.Fragments;
+package com.zerter.teamconnect.MenageGroup;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.ContentProviderOperation;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,6 @@ import com.google.gson.Gson;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MenageView.ListAdapterContacts;
 import com.zerter.teamconnect.Controlers.MenageView.ListAdapterGroups;
-import com.zerter.teamconnect.Dialogs.ConfirmCreateGroup;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.Models.Person;
 import com.zerter.teamconnect.R;
@@ -115,5 +116,21 @@ public class MenageGroupContacts extends Fragment {
 
     private List<Person> getContacts(){
         return data.getContacts();
+    }
+
+    private void creategroup(Long id, String name)
+    {
+        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+        ops.add(ContentProviderOperation
+                .newInsert(ContactsContract.Groups.CONTENT_URI)
+                .withValue(ContactsContract.Groups._ID, id)
+                .withValue(ContactsContract.Groups.TITLE,name).build());
+
+        try {
+            getActivity().getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

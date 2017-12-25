@@ -1,8 +1,11 @@
-package com.zerter.teamconnect.Dialogs;
+package com.zerter.teamconnect.MenageGroup;
 
 import android.app.DialogFragment;
+import android.content.ContentProviderOperation;
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +24,6 @@ import com.zerter.teamconnect.Controlers.MenageView.ListAdapterGroups;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.Models.Person;
 import com.zerter.teamconnect.R;
-import com.zerter.teamconnect.Views.Fragments.MenageGroupContacts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,12 +108,45 @@ public class ConfirmCreateGroup extends DialogFragment {
             groupList = data.getGroups();
         groupList.add(newContactsGroup);
         data.setGroups(new Gson().toJson(groupList));
+//        creategroup((long) 7,"m_test");
+//        createGroup();
     }
     public void setAdapter() {
-//        Arrays.sort(Cache.LISTA_KONTAKTOW.get());
         if (data.getGroups() != null) {
             ListAdapterGroups adapter = new ListAdapterGroups(getActivity(), data.getGroups());
             MenageGroupContacts.listView.setAdapter(adapter);
         }
+    }
+    private void creategroup(Long id, String name)
+    {
+        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+        ops.add(ContentProviderOperation
+                .newInsert(ContactsContract.Groups.CONTENT_URI)
+                .withValue(ContactsContract.Groups._ID, id)
+                .withValue(ContactsContract.Groups.TITLE,name).build());
+
+        try {
+            getActivity().getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    ContentValues groupValues;
+    private void createGroup() {
+        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+
+        ops.add(ContentProviderOperation
+                .newInsert(ContactsContract.Groups.CONTENT_URI)
+                .withValue(ContactsContract.Groups.TITLE, "SRI").build());
+        try {
+
+            getActivity().getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
+
+        } catch (Exception e) {
+            Log.e("Error", e.toString());
+        }
+
     }
 }
