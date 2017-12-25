@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="@color/colorPrimary"
+    tools:context=".MenageGroup.ConfirmDecisionDialog">
+
+    <com.zerter.teamconnect.Controlers.MyTextView
+        android:id="@+id/textViewConfirmTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="34sp"
+        android:text="@string/are_you_sure"
+        android:textAlignment="center"
+        app:customFont="fonts/Oswald-Stencil.ttf"
+        android:textColor="@color/textColor"
+        android:layout_marginBottom="10dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <com.zerter.teamconnect.Controlers.MyButton
+            android:id="@+id/buttonConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yes"
+            android:textColor="@color/textColor"
+            app:customFont="fonts/Oswald-Stencil.ttf"
+            android:background="?android:selectableItemBackground"/>
+
+        <com.zerter.teamconnect.Controlers.MyButton
+            android:id="@+id/buttonDismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/anuluj"
+            app:customFont="fonts/Oswald-Stencil.ttf"
+            android:textColor="@color/textColor"
+
+            android:background="?android:selectableItemBackground"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+</LinearLayout>

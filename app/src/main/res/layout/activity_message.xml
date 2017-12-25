@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="10dp"
-    tools:context=".Views.Fragments.Message"
+    tools:context=".Message.Message"
     tools:layout_editor_absoluteX="8dp"
     tools:layout_editor_absoluteY="8dp">
 
@@ -54,7 +54,9 @@
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="16dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="50dp" />
+            android:layout_marginEnd="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp" />
         <com.zerter.teamconnect.Controlers.MyButton
             android:id="@+id/button_wyslij"
             android:layout_width="50dp"
@@ -66,7 +68,8 @@
             android:textColor="@android:color/background_light"
             app:customFont="fonts/Oswald-Bold.ttf"
             android:layout_alignParentEnd="true"
-            android:layout_alignBottom="@+id/editText_tresc_smsa"/>
+            android:layout_alignBottom="@+id/editText_tresc_smsa"
+            android:layout_alignParentRight="true" />
 
 
     </RelativeLayout>

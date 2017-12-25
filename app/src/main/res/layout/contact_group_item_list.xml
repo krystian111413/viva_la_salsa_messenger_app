@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,7 +25,8 @@
             android:gravity="center_vertical"
             android:paddingLeft="5dp"
             app:customFont="fonts/Roboto-Bold.ttf"
-            android:layout_toEndOf="@id/contactImage"/>
+            android:layout_toEndOf="@id/contactImage"
+            android:layout_toRightOf="@id/contactImage" />
         <com.zerter.teamconnect.Controlers.MyTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +37,8 @@
             android:paddingLeft="5dp"
             app:customFont="fonts/Roboto-Light.ttf"
             android:layout_toEndOf="@id/contactImage"
-            android:layout_below="@+id/contactItemListName"/>
+            android:layout_below="@+id/contactItemListName"
+            android:layout_toRightOf="@id/contactImage" />
     </RelativeLayout>
 
     <View
