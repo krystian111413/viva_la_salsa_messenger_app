@@ -1,5 +1,6 @@
 package com.zerter.teamconnect.Controlers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -29,6 +30,10 @@ public class Data {
 
     public Data(Context context) {
         this.context = context;
+    }
+
+    public Data(Activity activity){
+        this.context = activity;
     }
 
     public void clearData(){

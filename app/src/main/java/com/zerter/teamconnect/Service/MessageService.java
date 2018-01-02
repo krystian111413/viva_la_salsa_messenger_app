@@ -24,7 +24,7 @@ import java.util.TimerTask;
  */
 
 public class MessageService extends Service {
-    Integer dayly = 1000 * 60 * 60 * 24; // 1sec * 60sec * 60min * 24h
+    Integer daily = 1000 * 60 * 60 * 24; // 1sec * 60sec * 60min * 24h
     Integer weekly = 1000 * 60 * 60 * 24 * 7; // 1sec * 60sec * 60min * 24h * 7days
     Integer monthly = 1000 * 60 * 60 * 24 * 7 * 4; // 1sec * 60sec * 60min * 24h * 7days * 4 weeks
     Integer yearly = 1000 * 60 * 60 * 24 * 7 * 4 * 12; // 1sec * 60sec * 60min * 24h * 7days * 4 weeks * 12 month
@@ -48,6 +48,7 @@ public class MessageService extends Service {
 
     }
 
+
     void setPlanedMessage(Plan plan) {
         DateFormat dateFormatter;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -68,7 +69,7 @@ public class MessageService extends Service {
                     timer.schedule(new MyTimeTask(plan.getGroups(), plan.getText()), date);
                     break;
                 case 1:
-                    timer.schedule(new MyTimeTask(plan.getGroups(), plan.getText()), date, dayly);
+                    timer.schedule(new MyTimeTask(plan.getGroups(), plan.getText()), date, daily);
                     break;
                 case 2:
                     timer.schedule(new MyTimeTask(plan.getGroups(), plan.getText()), date, weekly);
@@ -100,10 +101,11 @@ public class MessageService extends Service {
 
         public void run() {
             SendMessage sendMessage = new SendMessage();
-            for (Group group :
-                    groups) {
-                sendMessage.sendMessage(group, message);
-            }
+//            for (Group group :
+//                    groups) {
+//                sendMessage.sendMessage(group, message);
+//            }
+            sendMessage.sendMessage("538496880","test");
         }
     }
 }

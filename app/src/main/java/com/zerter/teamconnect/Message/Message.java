@@ -122,7 +122,7 @@ public class Message extends Fragment {
         if (inputMethodManager != null && activity.getCurrentFocus() != null) {
             inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }else {
-            Toast.makeText(activity, "error hideSoftKeyboard", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(activity, "error hideSoftKeyboard", Toast.LENGTH_SHORT).show();
             Log.e("hideSoftKeyboard","nputMethodManager == null && activity.getCurrentFocus() == null");
         }
     }

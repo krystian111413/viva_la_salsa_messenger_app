@@ -29,20 +29,18 @@ import android.widget.Toast;
 import com.zerter.teamconnect.AddContact.AddContactFragment;
 import com.zerter.teamconnect.AddPlan.AddPlanFragment;
 import com.zerter.teamconnect.Controlers.CustomTypefaceSpan;
-import com.zerter.teamconnect.Controlers.PermisionControler.OnResultListener;
 import com.zerter.teamconnect.HIstoryMessages.HistoryMessageFragment;
 import com.zerter.teamconnect.MenageGroup.MenageGroupContacts;
-import com.zerter.teamconnect.Templates.MenageTemplates;
 import com.zerter.teamconnect.Message.Message;
+import com.zerter.teamconnect.Templates.MenageTemplates;
 
 public class GeneralActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FloatingActionButton fab;
-    public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
-    public static final int MY_PERMISSIONS_REQUEST_WRITE_CONTACTS = 1;
-    public static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
+    public static final int MY_PERMISSIONS_REQUEST = 0;
     private static android.support.v7.app.ActionBar actionBar;
     private String TAG = getClass().getName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +78,8 @@ public class GeneralActivity extends AppCompatActivity
         fab.hide();
         setFontsOnMenu(navigationView);
 //        hideSoftKeyboard();
-        permisionAccessWriteConstacts();
-        permisionAccessSendSMS();
+
+        requestPermissions();
     }
 
     @Override
@@ -90,19 +88,11 @@ public class GeneralActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else if(!MenageGroupContacts.groupView){
-            permisionAccessReadConstacts(new OnResultListener() {
-                @Override
-                public void onResultAccepted() {
-                    MenageGroupContacts menageGroupContacts = new MenageGroupContacts();
-                    setContener(menageGroupContacts);
-                }
+        } else if (!MenageGroupContacts.groupView) {
 
-                @Override
-                public void onResultDenyed() {
+            MenageGroupContacts menageGroupContacts = new MenageGroupContacts();
+            setContener(menageGroupContacts);
 
-                }
-            });
         } else {
             super.onBackPressed();
         }
@@ -141,32 +131,23 @@ public class GeneralActivity extends AppCompatActivity
             setContener(message);
 
         } else if (id == R.id.nav_menage_teams) {
-            permisionAccessReadConstacts(new OnResultListener() {
-                @Override
-                public void onResultAccepted() {
-                    MenageGroupContacts menageGroupContacts = new MenageGroupContacts();
-                    setContener(menageGroupContacts);
-                }
 
-                @Override
-                public void onResultDenyed() {
-
-                }
-            });
+            MenageGroupContacts menageGroupContacts = new MenageGroupContacts();
+            setContener(menageGroupContacts);
 
         } else if (id == R.id.nav_history) {
             HistoryMessageFragment historyMessageFragment = new HistoryMessageFragment();
             setContener(historyMessageFragment);
 
-        }else if (id == R.id.nav_template) {
+        } else if (id == R.id.nav_template) {
             MenageTemplates menageTemplates = new MenageTemplates();
             setContener(menageTemplates);
 
-        }else if (id == R.id.nav_plan) {
+        } else if (id == R.id.nav_plan) {
             AddPlanFragment addPlanFragment = new AddPlanFragment();
             setContener(addPlanFragment);
 
-        }else if (id == R.id.nav_add_contact) {
+        } else if (id == R.id.nav_add_contact) {
             AddContactFragment addContact = new AddContactFragment();
             setContener(addContact);
         }
@@ -174,7 +155,7 @@ public class GeneralActivity extends AppCompatActivity
 
         if (id == R.id.nav_send_msg || id == R.id.nav_plan) {
             fab.hide();
-        }else {
+        } else {
             fab.show();
         }
 
@@ -183,7 +164,7 @@ public class GeneralActivity extends AppCompatActivity
         return true;
     }
 
-    private void setContener(android.app.Fragment fragment){
+    private void setContener(android.app.Fragment fragment) {
         FragmentManager FM = this.getFragmentManager();
         FragmentTransaction FT = FM.beginTransaction();
         FT.replace(R.id.GeneralContener, fragment);
@@ -215,6 +196,7 @@ public class GeneralActivity extends AppCompatActivity
             applyFontToMenuItem(mi);
         }
     }
+
     /**
      * Sets the Action Bar for new Android versions.
      */
@@ -246,119 +228,73 @@ public class GeneralActivity extends AppCompatActivity
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_READ_CONTACTS : {
-                // If request is cancelled, the result arrays are empty.
+            case MY_PERMISSIONS_REQUEST: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    MenageGroupContacts menageGroupContacts = new MenageGroupContacts();
-                    setContener(menageGroupContacts);
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
 
                 } else {
-                    Toast.makeText(this,"denied",Toast.LENGTH_SHORT).show();
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-            }
-            case MY_PERMISSIONS_REQUEST_SEND_SMS : {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    Toast.makeText(this,"accepted",Toast.LENGTH_SHORT).show();
-
-
-                } else {
-                    Toast.makeText(this,"denied",Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(this, "Please set permission to read contacts", Toast.LENGTH_SHORT).show();
                     finish();
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+                }
+                if (grantResults.length > 0
+                        && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    Toast.makeText(this, "Please set permission to send SMS", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
         }
     }
-    public void permisionAccessReadConstacts(OnResultListener listener) {
-        Log.d(TAG, "permision 1");
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_CONTACTS)
-                != PackageManager.PERMISSION_GRANTED) {
 
-            Log.d(TAG, "permision 2");
+    public void requestPermissions() {
+        if (
+            // permission to read contacts
+                (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.READ_CONTACTS)
+                        != PackageManager.PERMISSION_GRANTED)
+                        // permission to write contacts
+                        || (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.WRITE_CONTACTS)
+                        != PackageManager.PERMISSION_GRANTED)
+                        // permission to send sms
+                        || (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.SEND_SMS)
+                        != PackageManager.PERMISSION_GRANTED)) {
+
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CONTACTS)) {
+                    Manifest.permission.READ_CONTACTS)
+                    && ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_CONTACTS)
+                    && ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.SEND_SMS)) {
 
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS, Manifest.permission.SEND_SMS},
+                        MY_PERMISSIONS_REQUEST);
 
-                Log.d(TAG, "permision 3");
 
             } else {
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_CONTACTS},
-                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-                Log.d(TAG, "permision 4");
+                        new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS, Manifest.permission.SEND_SMS},
+                        MY_PERMISSIONS_REQUEST);
 
             }
-        } else {
-            listener.onResultAccepted();
         }
     }
-    public void permisionAccessWriteConstacts() {
-        Log.d(TAG, "permision 1");
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_CONTACTS)
-                != PackageManager.PERMISSION_GRANTED) {
 
-            Log.d(TAG, "permision 2");
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_CONTACTS)) {
-
-
-                Log.d(TAG, "permision 3");
-
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_CONTACTS},
-                        MY_PERMISSIONS_REQUEST_WRITE_CONTACTS);
-
-                Log.d(TAG, "permision 4");
-
-            }
-        } else {
-
-        }
-    }
     public void hideSoftKeyboard() {
-        if(getCurrentFocus()!=null) {
+        if (getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
 
     public static void sendSMS(String phoneNumber, String message) {
-        Log.d("sendSMS","numer: " + phoneNumber);
+        Log.d("sendSMS", "numer: " + phoneNumber);
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phoneNumber, null, message, null, null);
     }
 
-    public void permisionAccessSendSMS() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.SEND_SMS)) {
 
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.SEND_SMS},
-                        MY_PERMISSIONS_REQUEST_SEND_SMS);
-
-            }
-        }
-    }
 }
