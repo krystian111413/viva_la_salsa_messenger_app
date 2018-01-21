@@ -87,6 +87,11 @@ public class ListAdapterGroups extends ArrayAdapter<Group> {
             }
         });
 
+        if (grupa != null && grupa.getGoogleGroup()) {
+            delete.setVisibility(View.GONE);
+            edit.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
 

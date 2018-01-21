@@ -79,6 +79,8 @@ public class MenageGroupContacts extends Fragment {
                 }
             }
         });
+        
+        
 
     }
 
@@ -88,10 +90,10 @@ public class MenageGroupContacts extends Fragment {
     }
 
     public void setAdapter(int typeList) {
-        ListAdapterGroups adapterGroups = new ListAdapterGroups(getActivity(), getGroups());
+        ListAdapterGroups adapterGroups = new ListAdapterGroups(getActivity(), GroupsUtils.getGroups(getActivity()));
         switch (typeList){
             case 1:
-                if (getGroups()!=null) {
+                if (GroupsUtils.getGroups(getActivity())!=null) {
                     listView.setAdapter(adapterGroups);
                 }
                 groupView = true;
@@ -102,7 +104,7 @@ public class MenageGroupContacts extends Fragment {
                 groupView = false;
                 break;
             default:
-                if (getGroups()!=null) {
+                if (GroupsUtils.getGroups(getActivity())!=null) {
                     listView.setAdapter(adapterGroups);
                 }
                 groupView = true;
@@ -110,9 +112,6 @@ public class MenageGroupContacts extends Fragment {
 
     }
 
-    private  List<Group> getGroups(){
-        return data.getGroups();
-    }
 
     private List<Person> getContacts(){
         return data.getContacts();
@@ -133,4 +132,6 @@ public class MenageGroupContacts extends Fragment {
             e.printStackTrace();
         }
     }
+    
+
 }
