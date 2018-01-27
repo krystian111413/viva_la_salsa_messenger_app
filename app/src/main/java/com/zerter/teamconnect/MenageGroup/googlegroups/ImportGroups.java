@@ -2,15 +2,18 @@ package com.zerter.teamconnect.MenageGroup.googlegroups;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Groups;
+
+import com.zerter.teamconnect.Models.Person;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Created by krystiankowalski on 12.01.2018.
@@ -18,8 +21,10 @@ import java.util.LinkedHashMap;
 
 public class ImportGroups {
     private Context context;
+    private List<Person> contacts;
     public ImportGroups(Context context) {
         this.context = context;
+        this.contacts = new com.zerter.teamconnect.Controlers.Data(context).getContacts();
     }
 
     public ArrayList<Item> fetchGroups(){
@@ -89,12 +94,12 @@ public class ImportGroups {
                 +" AND "
                 +GroupMembership.MIMETYPE+"='"
                 +GroupMembership.CONTENT_ITEM_TYPE+"'";
-        String[] projection = new String[]{GroupMembership.RAW_CONTACT_ID,Data.DISPLAY_NAME};
-        Cursor cursor = context.getContentResolver().query(Data.CONTENT_URI, projection, where,null,
-                Data.DISPLAY_NAME+" COLLATE LOCALIZED ASC");
+        String[] projection = new String[]{GroupMembership.RAW_CONTACT_ID, ContactsContract.Data.DISPLAY_NAME};
+        Cursor cursor = context.getContentResolver().query(ContactsContract.Data.CONTENT_URI, projection, where,null,
+                ContactsContract.Data.DISPLAY_NAME+" COLLATE LOCALIZED ASC");
         while(cursor.moveToNext()){
             Item item = new Item();
-            item.name = cursor.getString(cursor.getColumnIndex(Data.DISPLAY_NAME));
+            item.name = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
             item.id = cursor.getString(cursor.getColumnIndex(GroupMembership.RAW_CONTACT_ID));
             Cursor phoneFetchCursor = context.getContentResolver().query(Phone.CONTENT_URI,
                     new String[]{Phone.NUMBER,Phone.DISPLAY_NAME,Phone.TYPE},
@@ -103,14 +108,25 @@ public class ImportGroups {
                 item.phNo = phoneFetchCursor.getString(phoneFetchCursor.getColumnIndex(Phone.NUMBER));
                 item.phDisplayName = phoneFetchCursor.getString(phoneFetchCursor.getColumnIndex(Phone.DISPLAY_NAME));
                 item.phType = phoneFetchCursor.getString(phoneFetchCursor.getColumnIndex(Phone.TYPE));
+                if(!item.name.equals(item.phDisplayName)){
+                    for (Person p:
+                         contacts) {
+                        if (p.getName().equals(item.name)){
+                            item.phNo = p.getNumber();
+                            item.phDisplayName = p.getName();
+                            break;
+                        }
+                    }
+                }
             }
             phoneFetchCursor.close();
+
+
             groupMembers.add(item);
         }
         cursor.close();
         return groupMembers;
     }
-
 
 
 }

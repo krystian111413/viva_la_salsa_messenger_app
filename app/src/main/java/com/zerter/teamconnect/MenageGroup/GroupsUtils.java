@@ -19,12 +19,12 @@ import java.util.List;
 public class GroupsUtils {
 
     public static List<Group> getGroups(Activity activity){
-        List<Group> groupList = GroupsUtils.parseGoogleGroupsToAplicationGroup(activity);
+        List<Group> groupList = GroupsUtils.parseGoogleGroupsToApplicationGroup(activity);
         groupList.addAll(new Data(activity).getGroups());
         return groupList;
     }
 
-    private static List<Group> parseGoogleGroupsToAplicationGroup(Activity activity){
+    private static List<Group> parseGoogleGroupsToApplicationGroup(Activity activity){
         LinkedHashMap<Item,ArrayList<Item>> googleGroups =  new ImportGroups(activity).initContactList();
 
         List<Group> groupList = new ArrayList<>();
