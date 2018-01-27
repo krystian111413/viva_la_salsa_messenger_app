@@ -20,7 +20,10 @@ public class GroupsUtils {
 
     public static List<Group> getGroups(Activity activity){
         List<Group> groupList = GroupsUtils.parseGoogleGroupsToApplicationGroup(activity);
-        groupList.addAll(new Data(activity).getGroups());
+        List<Group> applicationGroups = new Data(activity).getGroups();
+        if (!applicationGroups.isEmpty()) {
+            groupList.addAll(applicationGroups);
+        }
         return groupList;
     }
 
