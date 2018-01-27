@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.zerter.teamconnect.Controlers.Data;
 import com.zerter.teamconnect.Controlers.MyButton;
 import com.zerter.teamconnect.Controlers.MyTextView;
+import com.zerter.teamconnect.MenageGroup.GroupsUtils;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.Models.Message;
 import com.zerter.teamconnect.Models.Person;
@@ -103,7 +104,7 @@ public class SelectGroupToSendMessage extends DialogFragment {
 
     void setAdapter() {
         if(data.getGroups() != null){
-            ListAdapterGroups adapter = new ListAdapterGroups(getActivity(), data.getGroups());
+            ListAdapterGroups adapter = new ListAdapterGroups(getActivity(), GroupsUtils.getGroups(getActivity()));
             listView.setAdapter(adapter);
         }else {
             Toast.makeText(getActivity(), R.string.No_groups_error,Toast.LENGTH_LONG).show();

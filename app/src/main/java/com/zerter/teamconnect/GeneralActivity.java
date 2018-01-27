@@ -296,5 +296,4 @@ public class GeneralActivity extends AppCompatActivity
         sms.sendTextMessage(phoneNumber, null, message, null, null);
     }
 
-
 }
