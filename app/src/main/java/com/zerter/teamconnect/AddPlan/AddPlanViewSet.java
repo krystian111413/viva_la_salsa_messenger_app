@@ -328,6 +328,7 @@ public class AddPlanViewSet extends Fragment {
         List<Plan> plans = new ArrayList<>();
         for (int i = 0; i < planList.size();i++){
             if (i == indexPlan){
+                plan.setPlaned(false);
                 plans.add(plan);
             }else {
                 plans.add(planList.get(i));

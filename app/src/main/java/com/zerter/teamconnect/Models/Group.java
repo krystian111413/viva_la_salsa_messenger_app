@@ -10,6 +10,15 @@ import java.util.List;
 public class Group {
     private List<Person> persons = new ArrayList<>();
     private String name;
+    private Boolean isGoogleGroup = false;
+
+    public Boolean getGoogleGroup() {
+        return isGoogleGroup;
+    }
+
+    public void setGoogleGroup(Boolean googleGroup) {
+        isGoogleGroup = googleGroup;
+    }
 
     public String getName() {
         return name;
