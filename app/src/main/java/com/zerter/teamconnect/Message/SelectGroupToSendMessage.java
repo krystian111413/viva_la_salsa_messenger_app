@@ -49,13 +49,22 @@ public class SelectGroupToSendMessage extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         data = new Data(getActivity());
         sendButton = view.findViewById(R.id.buttonWyślij);
-        listView =  view.findViewById(R.id.listViewGroupToSend);
+        listView =  (ListView) view.findViewById(R.id.listViewGroupToSend);
         return view;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(GroupsUtils.getGroups(getActivity()) == null || GroupsUtils.getGroups(getActivity()).isEmpty()){
+            Toast.makeText(getActivity(), R.string.No_groups_error,Toast.LENGTH_LONG).show();
+            dismiss();
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             message = bundle.getString("message");
@@ -64,12 +73,6 @@ public class SelectGroupToSendMessage extends DialogFragment {
             dismiss();
         }
         setAdapter();
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,9 +114,6 @@ public class SelectGroupToSendMessage extends DialogFragment {
         if(GroupsUtils.getGroups(getActivity()) != null && !GroupsUtils.getGroups(getActivity()).isEmpty()){
             ListAdapterGroups adapter = new ListAdapterGroups(getActivity(), GroupsUtils.getGroups(getActivity()));
             listView.setAdapter(adapter);
-        }else {
-            Toast.makeText(getActivity(), R.string.No_groups_error,Toast.LENGTH_LONG).show();
-            dismiss();
         }
     }
 
