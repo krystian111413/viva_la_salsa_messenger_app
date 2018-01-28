@@ -32,7 +32,8 @@
             app:customFont="fonts/Oswald-Stencil.ttf"
             android:background="?android:selectableItemBackground"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true" />
 
     </RelativeLayout>
 
