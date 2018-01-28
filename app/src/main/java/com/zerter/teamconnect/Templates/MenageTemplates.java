@@ -28,6 +28,7 @@ public class MenageTemplates extends Fragment {
     public MyButton buttonDodajTemplate;
 
     Data data;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -46,9 +47,9 @@ public class MenageTemplates extends Fragment {
             @Override
             public void onClick(View v) {
                 List<Template> templates;
-                if (data.getTemplates() != null){
+                if (data.getTemplates() != null) {
                     templates = data.getTemplates();
-                }else {
+                } else {
                     templates = new ArrayList<Template>();
                 }
                 templates.add(new Template());
@@ -59,25 +60,30 @@ public class MenageTemplates extends Fragment {
         });
 
     }
-    public void setAdapter(List<Template> templates , Boolean focus) {
-        if (templates != null){
+
+    public void setAdapter(List<Template> templates, Boolean focus) {
+        if (templates != null) {
             ListAdapterTemplates adapter = new ListAdapterTemplates(getActivity(), templates, focus);
             listView.setAdapter(adapter);
         }
     }
+
     public void setAdapter(List<Template> templates) {
-        if (templates != null){
+        if (templates != null) {
             ListAdapterTemplates adapter = new ListAdapterTemplates(getActivity(), templates);
             listView.setAdapter(adapter);
         }
     }
+
     private class ListAdapterTemplates extends ArrayAdapter<Template> {
         Boolean focus = false;
         List<Template> templates = null;
+
         public ListAdapterTemplates(@NonNull Context context, List<Template> templates) {
             super(context, 0, templates);
             this.templates = templates;
         }
+
         public ListAdapterTemplates(@NonNull Context context, List<Template> templates, Boolean focus) {
             super(context, 0, templates);
             this.templates = templates;
@@ -89,8 +95,8 @@ public class MenageTemplates extends Fragment {
         public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             final Template template = getItem(position);
 
-            if (convertView == null){
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.template_edit_item_list,parent,false);
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.template_edit_item_list, parent, false);
             }
             final MyEditText text = (MyEditText) convertView.findViewById(R.id.templateEditText);
             final ImageButton delete = (ImageButton) convertView.findViewById(R.id.buttonDeleteTemplate);
@@ -102,38 +108,21 @@ public class MenageTemplates extends Fragment {
 
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
-    /* When focus is lost check that the text field
-    * has valid values.
-    */
                     if (!hasFocus) {
                         if (text.getText() != null) {
-                            templates.get(position).setText(text.getText().toString());
+                            if (position < templates.size()){
+                                templates.get(position).setText(text.getText().toString());
+                                data.setTemplates(new Gson().toJson(templates));
+                            }
+                        }else {
+                            templates.remove(position);
                             data.setTemplates(new Gson().toJson(templates));
-//                            setAdapter(templates);
+                            setAdapter(templates);
                         }
                     }
                 }
             });
 
-//            text.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//                @Override
-//                public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
-//                    if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-//                            actionId == EditorInfo.IME_ACTION_DONE ||
-//                            event.getAction() == KeyEvent.ACTION_DOWN &&
-//                                    event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-//                        if (!event.isShiftPressed()) {
-//                            // the user is done typing.
-////                            templates.get(position).setText(textView.getText().toString());
-////                            data.setTemplates(new Gson().toJson(templates));
-////                            setAdapter(templates);
-//                            Toast.makeText(getActivity(),"diala",Toast.LENGTH_SHORT).show();
-//                            return true; // consume.
-//                        }
-//                    }
-//                    return false;
-//                }
-//            });
 
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -144,7 +133,7 @@ public class MenageTemplates extends Fragment {
                 }
             });
 
-            if (focus && (templates.size()-1) == position){
+            if (focus && (templates.size() - 1) == position) {
                 text.requestFocus();
             }
 
