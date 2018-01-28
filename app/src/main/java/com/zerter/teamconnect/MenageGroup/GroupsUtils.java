@@ -23,7 +23,7 @@ public class GroupsUtils {
         if (activity != null) {
             groupList = GroupsUtils.parseGoogleGroupsToApplicationGroup(activity);
             List<Group> applicationGroups = new Data(activity).getGroups();
-            if (!applicationGroups.isEmpty()) {
+            if (applicationGroups != null && !applicationGroups.isEmpty()) {
                 groupList.addAll(applicationGroups);
             }
         }
