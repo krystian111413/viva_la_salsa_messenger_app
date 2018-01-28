@@ -18,14 +18,21 @@ import java.util.List;
 
 public class GroupsUtils {
 
-    public static List<Group> getGroups(Activity activity){
-        List<Group> groupList = GroupsUtils.parseGoogleGroupsToApplicationGroup(activity);
-        groupList.addAll(new Data(activity).getGroups());
+    public static List<Group> getGroups(Activity activity) {
+        List<Group> groupList = new ArrayList<>();
+        if (activity != null) {
+            groupList = GroupsUtils.parseGoogleGroupsToApplicationGroup(activity);
+            List<Group> applicationGroups = new Data(activity).getGroups();
+            if (applicationGroups != null && !applicationGroups.isEmpty()) {
+                groupList.addAll(applicationGroups);
+            }
+        }
+
         return groupList;
     }
 
-    private static List<Group> parseGoogleGroupsToApplicationGroup(Activity activity){
-        LinkedHashMap<Item,ArrayList<Item>> googleGroups =  new ImportGroups(activity).initContactList();
+    private static List<Group> parseGoogleGroupsToApplicationGroup(Activity activity) {
+        LinkedHashMap<Item, ArrayList<Item>> googleGroups = new ImportGroups(activity).initContactList();
 
         List<Group> groupList = new ArrayList<>();
 
