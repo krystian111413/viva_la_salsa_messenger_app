@@ -16,14 +16,13 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.zerter.teamconnect.Controlers.Data;
-import com.zerter.teamconnect.Controlers.MyButton;
 import com.zerter.teamconnect.Controlers.MyTextView;
+import com.zerter.teamconnect.GeneralActivity;
 import com.zerter.teamconnect.MenageGroup.GroupsUtils;
 import com.zerter.teamconnect.Models.Group;
 import com.zerter.teamconnect.Models.Message;
 import com.zerter.teamconnect.Models.Person;
 import com.zerter.teamconnect.R;
-import com.zerter.teamconnect.GeneralActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,9 +48,18 @@ public class SelectGroupToSendMessage extends DialogFragment {
         View view = inflater.inflate(R.layout.select_group_to_send_message, null);
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         data = new Data(getActivity());
-        sendButton = (MyButton) view.findViewById(R.id.buttonWyślij);
-        listView = (ListView) view.findViewById(R.id.listViewGroupToSend);
+        sendButton = view.findViewById(R.id.buttonWyślij);
+        listView =  (ListView) view.findViewById(R.id.listViewGroupToSend);
         return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(GroupsUtils.getGroups(getActivity()) == null || GroupsUtils.getGroups(getActivity()).isEmpty()){
+            Toast.makeText(getActivity(), R.string.No_groups_error,Toast.LENGTH_LONG).show();
+            dismiss();
+        }
     }
 
     @Override
@@ -103,12 +111,9 @@ public class SelectGroupToSendMessage extends DialogFragment {
     }
 
     void setAdapter() {
-        if(data.getGroups() != null){
+        if(GroupsUtils.getGroups(getActivity()) != null && !GroupsUtils.getGroups(getActivity()).isEmpty()){
             ListAdapterGroups adapter = new ListAdapterGroups(getActivity(), GroupsUtils.getGroups(getActivity()));
             listView.setAdapter(adapter);
-        }else {
-            Toast.makeText(getActivity(), R.string.No_groups_error,Toast.LENGTH_LONG).show();
-            dismiss();
         }
     }
 

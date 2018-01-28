@@ -38,6 +38,16 @@ class DialogFragmentToAddContactToGroup: DialogFragment() {
         return view
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (Data(activity).groups == null) {
+            Toast.makeText(activity, R.string.No_groups_error, Toast.LENGTH_LONG).show()
+            dismiss()
+        }
+
+
+    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapter()
