@@ -76,29 +76,49 @@ class DialogFragmentToAddContactToGroup: DialogFragment() {
         }
     }
 
+    class ViewHolder{
+        var mTextView: MyTextView? = null
+        var mView: View? = null
+
+
+    }
+
     private inner class ListAdapterGroups(internal var context: Context, groupList: List<Group>) : ArrayAdapter<Group>(context, 0, groupList) {
 
         internal var viewList: MutableList<View> = ArrayList()
 
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val convertView: View?
-            val grupa = getItem(position)
-            val inflater = activity.layoutInflater
-            convertView = inflater.inflate(R.layout.grupa_kontaktow_to_select, null)
+            val holder:ViewHolder?
+            var view = convertView
+            if (view == null){
+                holder = ViewHolder()
+//                val convertView: View?
+                val inflater = activity.layoutInflater
+                view = inflater.inflate(R.layout.grupa_kontaktow_to_select, null)
+                holder.mTextView = view!!.findViewById<MyTextView>(R.id.myTextViewContacts) as MyTextView
+                holder.mView = view
+            }else{
+                holder = view.tag as? ViewHolder
+            }
 
-            if (viewList.size > position && viewList[position] != null) {
-                return viewList[position]
+            if (holder == null){
+                return view
             }
-            val name = convertView!!.findViewById<MyTextView>(R.id.myTextViewContacts) as MyTextView
+            val grupa = getItem(position)
+
+
+//            if (viewList.size > position && viewList[position] != null) {
+//                return viewList[position]
+//            }
             if (grupa != null) {
-                name.text = grupa.name
+                holder!!.mTextView!!.text = grupa.name
             } else {
-                name.text = "n/a"
+                holder!!.mTextView!!.text = "n/a"
             }
-            convertView.setOnClickListener {
-                if (name.currentTextColor == getContext().resources.getColor(R.color.textSelected)) {
-                    name.setTextColor(getContext().resources.getColor(R.color.colorPrimary))
+            holder.mView!!.setOnClickListener {
+                if (holder.mTextView!!.currentTextColor == getContext().resources.getColor(R.color.textSelected)) {
+                    holder.mTextView!!.setTextColor(getContext().resources.getColor(R.color.colorPrimary))
 
                     val newListGroup = ArrayList<Group>()
                     for (group in groups) {
@@ -108,12 +128,12 @@ class DialogFragmentToAddContactToGroup: DialogFragment() {
                     }
                     groups = newListGroup
                 } else {
-                    name.setTextColor(getContext().resources.getColor(R.color.textSelected))
+                    holder.mTextView!!.setTextColor(getContext().resources.getColor(R.color.textSelected))
                     groups.add(grupa)
                 }
             }
-            viewList.add(convertView)
-            return convertView
+//            viewList.add(convertView)
+            return view
         }
     }
 }

@@ -42,6 +42,7 @@ public class SelectGroupToSendMessage extends DialogFragment {
 
     private String TAG = getClass().getName();
     String message;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -49,15 +50,15 @@ public class SelectGroupToSendMessage extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         data = new Data(getActivity());
         sendButton = view.findViewById(R.id.buttonWyślij);
-        listView =  (ListView) view.findViewById(R.id.listViewGroupToSend);
+        listView = (ListView) view.findViewById(R.id.listViewGroupToSend);
         return view;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(GroupsUtils.getGroups(getActivity()) == null || GroupsUtils.getGroups(getActivity()).isEmpty()){
-            Toast.makeText(getActivity(), R.string.No_groups_error,Toast.LENGTH_LONG).show();
+        if (GroupsUtils.getGroups(getActivity()) == null || GroupsUtils.getGroups(getActivity()).isEmpty()) {
+            Toast.makeText(getActivity(), R.string.No_groups_error, Toast.LENGTH_LONG).show();
             dismiss();
         }
     }
@@ -68,8 +69,8 @@ public class SelectGroupToSendMessage extends DialogFragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             message = bundle.getString("message");
-        }else {
-            Toast.makeText(getActivity(),"No messsage", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity(), "No messsage", Toast.LENGTH_SHORT).show();
             dismiss();
         }
         setAdapter();
@@ -82,11 +83,11 @@ public class SelectGroupToSendMessage extends DialogFragment {
                     for (Person person :
                             group.getPersons()) {
 
-                        GeneralActivity.sendSMS(person.getNumber().replace(" ",""), message);
+                        GeneralActivity.sendSMS(person.getNumber().replace(" ", ""), message);
                     }
 
                     List<com.zerter.teamconnect.Models.Message> messageList = new ArrayList<com.zerter.teamconnect.Models.Message>();
-                    if (data.getMessages() != null){
+                    if (data.getMessages() != null) {
                         messageList = data.getMessages();
                     }
                     Message msg = new Message();
@@ -103,7 +104,7 @@ public class SelectGroupToSendMessage extends DialogFragment {
                     messageList.add(msg);
                     data.setMessages(new Gson().toJson(messageList));
                 }
-                Toast.makeText(getActivity(),R.string.Message_was_sent,Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), R.string.Message_was_sent, Toast.LENGTH_LONG).show();
                 dismiss();
 
             }
@@ -111,10 +112,15 @@ public class SelectGroupToSendMessage extends DialogFragment {
     }
 
     void setAdapter() {
-        if(GroupsUtils.getGroups(getActivity()) != null && !GroupsUtils.getGroups(getActivity()).isEmpty()){
+        if (GroupsUtils.getGroups(getActivity()) != null && !GroupsUtils.getGroups(getActivity()).isEmpty()) {
             ListAdapterGroups adapter = new ListAdapterGroups(getActivity(), GroupsUtils.getGroups(getActivity()));
             listView.setAdapter(adapter);
         }
+    }
+
+    static class ViewHolder{
+        MyTextView myTextView;
+        View mView;
     }
 
     private class ListAdapterGroups extends ArrayAdapter<Group> {
@@ -128,29 +134,40 @@ public class SelectGroupToSendMessage extends DialogFragment {
             this.context = context;
         }
 
-        List<View> viewList = new ArrayList<>();
+//        List<View> viewList = new ArrayList<>();
 
         @NonNull
         @Override
         public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            final Group grupa = getItem(position);
-            LayoutInflater inflater = getActivity().getLayoutInflater();
-            convertView = inflater.inflate(R.layout.grupa_kontaktow_to_select,null);
 
-            if (viewList.size() > position && viewList.get(position) != null) {
-                return viewList.get(position);
+            final ViewHolder viewHolder;
+
+            if (convertView == null) {
+                LayoutInflater inflater = getActivity().getLayoutInflater();
+                convertView = inflater.inflate(R.layout.grupa_kontaktow_to_select, null);
+                viewHolder = new ViewHolder();
+                viewHolder.myTextView = convertView.findViewById(R.id.myTextViewContacts);
+                viewHolder.mView = convertView;
+                convertView.setTag(viewHolder);
+            }else {
+                viewHolder = (ViewHolder) convertView.getTag();
             }
-            final MyTextView name = (MyTextView) convertView.findViewById(R.id.myTextViewContacts);
+            final Group grupa = getItem(position);
+
+//            if (viewList.size() > position && viewList.get(position) != null) {
+//                return viewList.get(position);
+//            }
+
             if (grupa != null) {
-                name.setText(grupa.getName());
+                viewHolder.myTextView.setText(grupa.getName());
             } else {
-                name.setText("n/a");
+                viewHolder.myTextView.setText("n/a");
             }
-            convertView.setOnClickListener(new View.OnClickListener() {
+            viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (name.getCurrentTextColor() == getContext().getResources().getColor(R.color.textSelected)) {
-                        name.setTextColor(getContext().getResources().getColor(R.color.colorPrimary));
+                    if (viewHolder.myTextView.getCurrentTextColor() == getContext().getResources().getColor(R.color.textSelected)) {
+                        viewHolder.myTextView.setTextColor(getContext().getResources().getColor(R.color.colorPrimary));
 
                         List<Group> newListGroup = new ArrayList<Group>();
                         for (Group group :
@@ -161,12 +178,13 @@ public class SelectGroupToSendMessage extends DialogFragment {
                         }
                         groups = newListGroup;
                     } else {
-                        name.setTextColor(getContext().getResources().getColor(R.color.textSelected));
+                        viewHolder.myTextView.setTextColor(getContext().getResources().getColor(R.color.textSelected));
                         groups.add(grupa);
                     }
                 }
             });
-            viewList.add(convertView);
+//            viewList.add(convertView);
+
             return convertView;
         }
     }
