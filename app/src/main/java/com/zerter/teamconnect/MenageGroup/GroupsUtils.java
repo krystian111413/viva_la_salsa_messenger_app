@@ -17,14 +17,17 @@ import java.util.List;
  */
 
 public class GroupsUtils {
-
+    public static List<Group> groupList = new ArrayList<>();
     public static List<Group> getGroups(Activity activity) {
-        List<Group> groupList = new ArrayList<>();
+//        List<Group> groupList = new ArrayList<>();
         if (activity != null) {
-            groupList = GroupsUtils.parseGoogleGroupsToApplicationGroup(activity);
-            List<Group> applicationGroups = new Data(activity).getGroups();
-            if (applicationGroups != null && !applicationGroups.isEmpty()) {
-                groupList.addAll(applicationGroups);
+            if (groupList.isEmpty()) {
+//                groupList = GroupsUtils.parseGoogleGroupsToApplicationGroup(activity);
+                groupList = new ImportGroups(activity).getEmptyGroups();
+                List<Group> applicationGroups = new Data(activity).getGroups();
+                if (applicationGroups != null && !applicationGroups.isEmpty()) {
+                    groupList.addAll(applicationGroups);
+                }
             }
         }
 
@@ -56,4 +59,6 @@ public class GroupsUtils {
 
         return groupList;
     }
+
+
 }

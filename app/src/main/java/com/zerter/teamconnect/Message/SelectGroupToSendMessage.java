@@ -81,7 +81,7 @@ public class SelectGroupToSendMessage extends DialogFragment {
                 for (Group group :
                         groups) {
                     for (Person person :
-                            group.getPersons()) {
+                            group.getPersons(getActivity())) {
 
                         GeneralActivity.sendSMS(person.getNumber().replace(" ", ""), message);
                     }
