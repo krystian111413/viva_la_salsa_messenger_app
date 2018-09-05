@@ -82,8 +82,11 @@ public class SelectGroupToSendMessage extends DialogFragment {
                         groups) {
                     for (Person person :
                             group.getPersons(getActivity())) {
+                        try {
+                            GeneralActivity.sendSMS(person.getNumber().replace(" ", ""), message);
+                        }catch (Exception e){
 
-                        GeneralActivity.sendSMS(person.getNumber().replace(" ", ""), message);
+                        }
                     }
 
                     List<com.zerter.teamconnect.Models.Message> messageList = new ArrayList<com.zerter.teamconnect.Models.Message>();
